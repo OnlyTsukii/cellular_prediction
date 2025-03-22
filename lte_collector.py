@@ -4,6 +4,8 @@ import time
 import csv
 import math
 import os
+import json
+
 from collections import defaultdict
 
 SERIAL_PORT = '/dev/ttyUSB2'
@@ -116,8 +118,13 @@ def parse_qnwinfo(response):
         return None
 
 def main():
+    with open('config.json', 'r') as file:
+        config = json.load(file)
+
+    serial_port = config['Serial-LTE']
+    
     ser = serial.Serial(
-        port=SERIAL_PORT,
+        port=serial_port,
         baudrate=BAUD_RATE,
         timeout=1
     )

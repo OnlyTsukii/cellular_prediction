@@ -1,0 +1,4 @@
+{
+    "Serial_5G": "/dev/ttyUSB2",
+    "Serial_LTE": "/dev/ttyUSB6"
+}

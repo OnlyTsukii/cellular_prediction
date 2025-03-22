@@ -3,7 +3,7 @@
 
 MAX_RETRIES=12      # Maximum number of retries for interface detection
 RETRY_INTERVAL=5    # Retry interval in seconds
-AT_DEVICES=("/dev/ttyUSB2" "/dev/ttyUSB3")  # List of AT command device nodes
+AT_DEVICES=()  # List of AT command device nodes
 APN="cmnet"         # Carrier APN name
 MAX_RETRIES_AT=5    # Maximum retries for AT commands
 LOG_FILE="/var/log/cellular.log" # Log file path
@@ -43,6 +43,17 @@ send_at() {
 check_deps() {
   command -v socat >/dev/null || die "Missing dependency: socat"
   command -v udhcpc >/dev/null || die "Missing dependency: udhcpc"
+  command -v jq >/dev/null || die "Missing dependency: jq"
+
+  mapfile -t keys < <(jq -r 'keys[]' config.json)
+
+  for key in "${keys[@]}"; do
+    port=$(jq -r ".$key" config.json)
+    AT_DEVICES+=("$port")
+  done
+
+  echo "FOUND DEVICES: ${AT_DEVICES[@]}"
+
   for at_device in "${AT_DEVICES[@]}"; do
     [ -c $at_device ] || die "Device not found: $at_device"
   done
