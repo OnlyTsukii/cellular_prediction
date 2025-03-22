@@ -11,14 +11,15 @@ BAUD_RATE = 115200
 PREFIX = '/home/jetson/data_collector/dataset/5g'
 
 CSV_HEADER = [
-    "timestamp", "network_mode", "cell_id",
-    "rsrp", "rsrq", "sinr", "avg_neighbor_rsrp",
-    "avg_neighbor_rsrq", "avg_neighbor_sinr",
-    "echng", "rssi", "band",
+    "timestamp", "network_mode", "state", "duplex_mode", 
+    "cell_id", "rsrp", "rsrq", "sinr", "avg_neighbor_rsrp",
+    "avg_neighbor_rsrq", "avg_neighbor_sinr", "bandwidth",
+    "cell_changed", "rssi", "band",
 ]
 
 def parse_servingcell(response):
     try:
+        last_state = ''
         for line in response.split('\n'):
             if not line.startswith('+QENG:'):
                 continue
@@ -26,46 +27,61 @@ def parse_servingcell(response):
             line = line.replace('+QENG:', '').strip()
 
             parts = [p.strip() for p in line.split(',')]
-            if len(parts) < 12:
-                return None
-            
-            mode = ''
+
+            net_mode = ''
+            state = ''
+            duplex_mode = ''
             cell_id = ''
             rsrp = ''
             rsrq = ''
             sinr = ''
+            bandwidth = ""
 
-            if parts[2] == 'NR5G-SA':
-                mode = 'NR5G-SA'
+            if len(parts) == 2:
+                last_state = parts[1]
+                continue
+
+            if len(parts) < 12:
+                return None
+
+            if parts[2] == '"NR5G-SA"':
+                net_mode = 'NR5G-SA'
+                state = parts[1]
+                duplex_mode = parts[3]
                 cell_id = parts[6]
                 rsrp = parts[12]
                 rsrq = parts[13]
                 sinr = parts[14]
-            elif parts[2] == 'LTE':
-                mode = 'LTE'
+                bandwidth = parts[11]
+            elif parts[2] == '"LTE"':
+                net_mode = 'LTE'
+                state = parts[1]
+                duplex_mode = parts[3]
                 cell_id = parts[6]
                 rsrp = parts[13]
                 rsrq = parts[14]
                 sinr = parts[16]
-            elif parts[0] == 'LTE':
-                mode = 'LTE'
+                bandwidth = parts[11]
+            elif parts[0] == '"LTE"':
+                net_mode = 'EN-DC'
+                state = last_state
+                duplex_mode = parts[1]
                 cell_id = parts[4]
                 rsrp = parts[11]
                 rsrq = parts[12]
                 sinr = parts[14]
-            elif parts[0] == 'NR5G-NSA':
-                mode = 'NR5G-NSA'
-                cell_id = parts[9]
-                rsrp = parts[4]
-                rsrq = parts[6]
-                sinr = parts[5]
+                bandwidth = parts[9]
+                last_state = ''
                 
             return {
-                'network_mode': mode,
+                'network_mode': net_mode,
+                "state": state,
+                "duplex_mode": duplex_mode,
                 'cell_id': cell_id,
                 'rsrp': rsrp,
                 'rsrq': rsrq,
                 'sinr': sinr,
+                "bandwidth": bandwidth
             }
         
         return None
@@ -100,9 +116,9 @@ def parse_neighborcell(response):
                 stats['sinr'].append(float(parts[7]))
 
     return {
-        'avg_rsrq': int(sum(stats['rsrq'])/len(stats['rsrq'])) if stats['rsrq'] else 'N/A',
-        'avg_rsrp': int(sum(stats['rsrp'])/len(stats['rsrp'])) if stats['rsrp'] else 'N/A',
-        'avg_sinr': int(sum(stats['sinr'])/len(stats['sinr'])) if stats['sinr'] else 'N/A',
+        'avg_rsrq': int(sum(stats['rsrq'])/len(stats['rsrq'])) if stats['rsrq'] else 0,
+        'avg_rsrp': int(sum(stats['rsrp'])/len(stats['rsrp'])) if stats['rsrp'] else 0,
+        'avg_sinr': int(sum(stats['sinr'])/len(stats['sinr'])) if stats['sinr'] else 0,
     }
 
 def parse_csq(response):
@@ -140,7 +156,7 @@ def parse_qnwinfo(response):
                 return None
             
             return {
-                'band': int(parts[2]),
+                'band': parts[2][1:-1],
             }
         return None
     except Exception as e:
@@ -156,7 +172,7 @@ def main():
     
     last_cell_id = None
 
-    current_date = datetime.datetime.now().strftime('%Y-%m-%d-%h')
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
     file_path = os.path.join(PREFIX, f'network_stats_{current_date}.csv')
     csv_file = open(file_path, 'a', newline='')
     writer = csv.writer(csv_file)
@@ -186,18 +202,20 @@ def main():
             qnwinfo_data = parse_qnwinfo(qnwinfo_response)
             
             current_cell_id = serving_data['cell_id'] if serving_data else None
-            echng = 1 if current_cell_id and (current_cell_id != last_cell_id) else 0
+            cell_changed = 1 if current_cell_id and (current_cell_id != last_cell_id) else 0
             last_cell_id = current_cell_id
 
             rssi = csq_data.get('csq_rssi', math.nan) if csq_data else math.nan
             if not math.isnan(rssi):
                 rssi = int(rssi)
             else:
-                rssi = 'N/A'
+                rssi = 99
             
             writer.writerow([
                 ts,
                 serving_data.get('network_mode', 'N/A') if serving_data else 'N/A',
+                serving_data.get('state', 'N/A') if serving_data else 'N/A',
+                serving_data.get('duplex_mode', 'N/A') if serving_data else 'N/A',
                 serving_data.get('cell_id', 'N/A') if serving_data else 'N/A',
                 serving_data.get('rsrp', 'N/A') if serving_data else 'N/A',
                 serving_data.get('rsrq', 'N/A') if serving_data else 'N/A',
@@ -205,7 +223,8 @@ def main():
                 neighbor_data['avg_rsrq'],
                 neighbor_data['avg_rsrp'],
                 neighbor_data['avg_sinr'],
-                echng,
+                serving_data.get('bandwidth', 'N/A') if serving_data else 'N/A',
+                cell_changed,
                 rssi,
                 qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A'
             ])
