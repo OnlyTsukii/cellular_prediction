@@ -5,6 +5,8 @@ import csv
 import math
 import os
 import json
+import subprocess
+from threading import Thread
 
 from collections import defaultdict
 
@@ -16,6 +18,7 @@ CSV_HEADER = [
     "cell_id", "rsrp", "rsrq", "sinr", "avg_neighbor_rsrp",
     "avg_neighbor_rsrq", "avg_neighbor_sinr", "bandwidth",
     "cell_changed", "rssi", "band",
+    "ul_bandwidth", "dl_bandwidth", "rtt", "jitter", "loss_rate"
 ]
 
 def parse_servingcell(response):

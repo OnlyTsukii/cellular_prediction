@@ -47,7 +47,7 @@ check_deps() {
   command -v jq >/dev/null || die "Missing dependency: jq"
 
   # Read device ports from config.json
-  mapfile -t keys < <(jq -r 'keys[]' config.json)
+  mapfile -t keys < <(jq -r 'to_entries[] | select(.key | startswith("Serial")) | .key' config.json)
 
   for key in "${keys[@]}"; do
     port=$(jq -r ".$key" config.json)

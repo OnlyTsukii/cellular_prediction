@@ -1,4 +1,8 @@
 {
-    "Serial_5G": "/dev/ttyUSB99",
-    "Serial_LTE": "/dev/ttyUSB1"
+    "Serial_5G": "/dev/ttyUSB3",
+    "Serial_LTE": "/dev/ttyUSB99",
+    "SERVER_IP": "8.133.248.39",
+    "TCP_UL_PORT": 5201,
+    "TCP_DL_PORT": 5202,
+    "UDP_PORT": 5203
 }
