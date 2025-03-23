@@ -39,12 +39,14 @@ send_at() {
   return 1
 }
 
-# Check for required tools
+# Check for required tools and devices
 check_deps() {
+  # Check for required tools
   command -v socat >/dev/null || die "Missing dependency: socat"
   command -v udhcpc >/dev/null || die "Missing dependency: udhcpc"
   command -v jq >/dev/null || die "Missing dependency: jq"
 
+  # Read device ports from config.json
   mapfile -t keys < <(jq -r 'keys[]' config.json)
 
   for key in "${keys[@]}"; do
@@ -52,11 +54,27 @@ check_deps() {
     AT_DEVICES+=("$port")
   done
 
-  echo "FOUND DEVICES: ${AT_DEVICES[@]}"
+  echo "CONFIGURED DEVICES: ${AT_DEVICES[@]}"
 
+  # Filter out non-existent devices
+  local valid_devices=()
   for at_device in "${AT_DEVICES[@]}"; do
-    [ -c $at_device ] || die "Device not found: $at_device"
+    if [ -c "$at_device" ]; then
+      valid_devices+=("$at_device")
+    else
+      echo "Device not found: $at_device (removing from list)"
+    fi
   done
+
+  # Update AT_DEVICES with valid devices
+  AT_DEVICES=("${valid_devices[@]}")
+
+  # Check if any valid devices remain
+  if [ ${#AT_DEVICES[@]} -eq 0 ]; then
+    die "No valid devices found!"
+  fi
+
+  echo "VALID DEVICES: ${AT_DEVICES[@]}"
 }
 
 # Operate on all enx interfaces

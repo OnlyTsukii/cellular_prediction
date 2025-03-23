@@ -9,7 +9,7 @@ import json
 from collections import defaultdict
 
 BAUD_RATE = 115200
-PREFIX = '/home/jetson/data_collector/dataset/5g'
+PREFIX = '/home/ccl/cellular_prediction/dataset/5g'
 
 CSV_HEADER = [
     "timestamp", "network_mode", "state", "duplex_mode", 
@@ -76,8 +76,8 @@ def parse_servingcell(response):
                 
             return {
                 'network_mode': net_mode,
-                "state": state,
-                "duplex_mode": duplex_mode,
+                "state": state[1:-1],
+                "duplex_mode": duplex_mode[1:-1],
                 'cell_id': cell_id,
                 'rsrp': rsrp,
                 'rsrq': rsrq,
@@ -169,7 +169,7 @@ def main():
     with open('config.json', 'r') as file:
         config = json.load(file)
 
-    serial_port = config['Serial-5G']
+    serial_port = config['Serial_5G']
     
     ser = serial.Serial(
         port=serial_port,
@@ -185,8 +185,6 @@ def main():
     writer = csv.writer(csv_file)
     if csv_file.tell() == 0:
         writer.writerow(CSV_HEADER)
-
-    count = 0
     
     while True:
         try:
@@ -236,15 +234,12 @@ def main():
                 qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A'
             ])
             csv_file.flush()
-            
-            # count += 1
-            # if count == 30:
-            #     break
 
             time.sleep(1) 
         
         except KeyboardInterrupt:
             print("\n user interrupted")
+            break
         except Exception as e:
             print(f"error: {str(e)}")
 

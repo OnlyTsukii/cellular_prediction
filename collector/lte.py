@@ -8,9 +8,8 @@ import json
 
 from collections import defaultdict
 
-SERIAL_PORT = '/dev/ttyUSB2'
 BAUD_RATE = 115200
-PREFIX = '/home/jetson/data_collector/dataset/lte'
+PREFIX = '/home/ccl/cellular_prediction/dataset/lte'
 
 CSV_HEADER = [
     "timestamp", "network_mode", "state", "duplex_mode", 
@@ -33,8 +32,8 @@ def parse_servingcell(response):
                 
             return {
                 'network_mode': 'LTE',
-                "state": parts[1],
-                "duplex_mode": parts[3],
+                "state": parts[1][1:-1],
+                "duplex_mode": parts[3][1:-1],
                 'cell_id': parts[6],
                 'rsrp': parts[13],
                 'rsrq': parts[14],
@@ -68,6 +67,7 @@ def parse_neighborcell(response):
 
             if parts[7] != '-':
                 stats['sinr'].append(float(parts[7]))
+
     
     return {
         'avg_rsrq': int(sum(stats['rsrq'])/len(stats['rsrq'])) if stats['rsrq'] else 0,
@@ -121,7 +121,7 @@ def main():
     with open('config.json', 'r') as file:
         config = json.load(file)
 
-    serial_port = config['Serial-LTE']
+    serial_port = config['Serial_LTE']
     
     ser = serial.Serial(
         port=serial_port,
@@ -137,8 +137,6 @@ def main():
     writer = csv.writer(csv_file)
     if csv_file.tell() == 0:
         writer.writerow(CSV_HEADER)
-
-    count = 0
     
     while True:
         try:
@@ -188,15 +186,12 @@ def main():
                 qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A'
             ])
             csv_file.flush()
-            
-            # count += 1
-            # if count == 30:
-            #     break
 
             time.sleep(1) 
         
         except KeyboardInterrupt:
             print("\n user interrupted")
+            break
         except Exception as e:
             print(f"error: {str(e)}")
 
