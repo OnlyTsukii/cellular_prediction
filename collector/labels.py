@@ -15,9 +15,10 @@ class LabelsCollector:
 
         self.ul_bandwidth = math.nan
         self.rtt = math.nan
-        self.throughput = math.nan
+        self.ul_throughput = math.nan
         self.retry = math.nan
         self.cwnd = math.nan
+        self.loss_rate = math.nan
     
     def run_iperf_test(self):
         """Run iperf3 test and continuously parse results."""
@@ -48,13 +49,17 @@ class LabelsCollector:
                 if "Mbits/sec" in line and "sender" not in line:
                     combine_data = line.split(' ')
                     combine_data = [s for s in combine_data if s != '']
+                  
                     self.ul_bandwidth = float(combine_data[6])
-                    self.throughput = float(combine_data[4])
-                    self.retry = int(combine_data[8])
-                    self.cwnd = int(combine_data[9])
+                    self.ul_throughput = float(combine_data[4])
+                    self.retry = int(float(combine_data[8]))
+                    self.cwnd = float(combine_data[9])
+
+                    sent_packets = (self.ul_bandwidth * 1e6) / (8 * 1500)
+                    self.loss_rate = f"{(self.retry / sent_packets):.4f}"
 
             except Exception as e:
-                print(f"Error: {str(e)}")
+                print(f"run_iperf_test error: {str(e)}")
     
     def ping_monitor(self):
         """Continuously run ping and update RTT."""
@@ -82,25 +87,18 @@ class LabelsCollector:
 
     def start_services(self):
         """Start all background services."""
-        # Start bandwidth tests
         threading.Thread(target=self.run_iperf_test).start()
-
-        # Start ping monitor
         threading.Thread(target=self.ping_monitor).start()
 
 def main():
 
     collector = LabelsCollector()
-  
-    # Start all background services
     collector.start_services()
     
-    # Main loop
     while True:
         try:
-            # Print metrics to console
             print(f"Uplink Bandwidth: {collector.ul_bandwidth:.2f} Mbits/sec")
-            print(f"Throughput: {collector.throughput:.2f} MBytes")
+            print(f"Throughput: {collector.ul_throughput:.2f} MBytes")
             print(f"RTT: {collector.rtt:.2f} ms")
             print(f"Retry: {collector.retry} times")
             print(f"CongestionWindow: {collector.cwnd} KBytes")

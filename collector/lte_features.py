@@ -7,15 +7,18 @@ import os
 import json
 
 from collections import defaultdict
+from labels import LabelsCollector
 
 BAUD_RATE = 115200
 PREFIX = '/home/ccl/cellular_prediction/dataset/lte'
 
 CSV_HEADER = [
     "timestamp", "network_mode", "state", "duplex_mode", 
-    "cell_id", "rsrp", "rsrq", "sinr", "avg_neighbor_rsrp",
+    "cell_id", "rsrp", "rsrq", "sinr", "max_neighbor_rsrp",
+    "max_neighbor_rsrq", "max_neighbor_sinr", "avg_neighbor_rsrp",
     "avg_neighbor_rsrq", "avg_neighbor_sinr", "bandwidth",
-    "cell_changed", "rssi", "band",
+    "cell_changed", "rssi", "band", "ul_bandwidth", 
+    "ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
 ]
 
 def parse_servingcell(response):
@@ -70,6 +73,9 @@ def parse_neighborcell(response):
 
     
     return {
+        'max_rsrq': int(max(stats['rsrq'])) if stats['rsrq'] else 0,
+        'max_rsrp': int(max(stats['rsrp'])) if stats['rsrp'] else 0,
+        'max_sinr': int(max(stats['sinr'])) if stats['sinr'] else 0,
         'avg_rsrq': int(sum(stats['rsrq'])/len(stats['rsrq'])) if stats['rsrq'] else 0,
         'avg_rsrp': int(sum(stats['rsrp'])/len(stats['rsrp'])) if stats['rsrp'] else 0,
         'avg_sinr': int(sum(stats['sinr'])/len(stats['sinr'])) if stats['sinr'] else 0,
@@ -128,6 +134,9 @@ def main():
         baudrate=BAUD_RATE,
         timeout=1
     )
+
+    collector = LabelsCollector()
+    collector.start_services()
     
     last_cell_id = None
 
@@ -167,6 +176,13 @@ def main():
                 rssi = int(rssi)
             else:
                 rssi = 99
+
+            ul_bandwidth = collector.ul_bandwidth
+            ul_throughput = collector.ul_throughput
+            rtt = collector.rtt
+            retry = collector.retry
+            cwnd = collector.cwnd
+            loss_rate = collector.loss_rate
             
             writer.writerow([
                 ts,
@@ -177,13 +193,22 @@ def main():
                 serving_data.get('rsrp', 'N/A') if serving_data else 'N/A',
                 serving_data.get('rsrq', 'N/A') if serving_data else 'N/A',
                 serving_data.get('sinr', 'N/A') if serving_data else 'N/A', 
-                neighbor_data['avg_rsrq'],
+                neighbor_data['max_rsrp'],
+                neighbor_data['max_rsrq'],
+                neighbor_data['max_sinr'],
                 neighbor_data['avg_rsrp'],
+                neighbor_data['avg_rsrq'],
                 neighbor_data['avg_sinr'],
                 serving_data.get('bandwidth', 'N/A') if serving_data else 'N/A',
                 cell_changed,
                 rssi,
-                qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A'
+                qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A',
+                ul_bandwidth,
+                ul_throughput,
+                rtt,
+                retry,
+                cwnd,
+                loss_rate
             ])
             csv_file.flush()
 
