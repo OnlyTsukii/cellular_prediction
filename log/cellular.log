@@ -1,0 +1,607 @@
+[2025-03-25 10:37:46] CONFIGURED DEVICES: []
+[2025-03-25 10:37:46] Error: No valid devices found!
+[2025-03-25 10:39:54] CONFIGURED DEVICES: []
+[2025-03-25 10:39:54] FOUND DEVICES: []
+[2025-03-25 10:39:54] === Starting Dial-Up Process ===
+[2025-03-25 10:39:54] === Dial-Up Process Completed ===
+[2025-03-25 10:40:35] CONFIGURED DEVICES: []
+[2025-03-25 10:40:35] FOUND DEVICES: []
+[2025-03-25 10:40:35] === Starting Dial-Up Process ===
+[2025-03-25 10:40:35] down network interface enxe6d71579a286
+[2025-03-25 10:40:35] === Dial-Up Process Completed ===
+[2025-03-25 10:41:41] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 10:41:41] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 10:41:41] === Starting Dial-Up Process ===
+[2025-03-25 10:41:41] down network interface enxe6d71579a286
+[2025-03-25 10:41:41] === Dial-Up Process Completed ===
+[2025-03-25 10:43:12] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 10:43:12] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 10:43:12] === Starting Dial-Up Process ===
+[2025-03-25 10:43:12] down network interface enxe6d71579a286
+[2025-03-25 10:43:12] === Dial-Up Process Completed ===
+[2025-03-25 10:43:28] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 10:43:28] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 10:43:28] === Starting Dial-Up Process ===
+[2025-03-25 10:43:28] down network interface enxe6d71579a286
+[2025-03-25 10:43:28] === Dial-Up Process Completed ===
+[2025-03-25 10:43:54] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 10:43:54] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 10:43:54] === Starting Dial-Up Process ===
+[2025-03-25 10:43:54] Wrong interface action: dow
+[2025-03-25 10:43:54] === Dial-Up Process Completed ===
+[2025-03-25 10:48:53] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 10:48:53] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 10:48:53] === Starting Dial-Up Process ===
+[2025-03-25 10:48:53] down network interface enxe6d71579a286
+[2025-03-25 10:48:53] Sending AT command to None: AT (Attempt 1/5)
+[2025-03-25 10:48:53] Did not receive expected response: OK
+[2025-03-25 10:48:53] Actual response: 
+[2025-03-25 10:48:55] Sending AT command to None: AT (Attempt 2/5)
+[2025-03-25 10:48:55] Did not receive expected response: OK
+[2025-03-25 10:48:55] Actual response: 
+[2025-03-25 10:48:57] Sending AT command to None: AT (Attempt 3/5)
+[2025-03-25 10:48:57] Did not receive expected response: OK
+[2025-03-25 10:48:57] Actual response: 
+[2025-03-25 10:48:59] Sending AT command to None: AT (Attempt 4/5)
+[2025-03-25 10:48:59] Did not receive expected response: OK
+[2025-03-25 10:48:59] Actual response: 
+[2025-03-25 11:00:12] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:00:12] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:00:12] === Starting Dial-Up Process ===
+[2025-03-25 11:00:12] Serial port None opened at 115200 baud
+[2025-03-25 11:00:12] Attempt 1/12 for command: A
+[2025-03-25 11:00:12] Error sending A: Attempting to use a port that is not open
+[2025-03-25 11:00:12] === Dial-Up Process Completed ===
+[2025-03-25 11:03:15] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:03:15] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:03:15] === Starting Dial-Up Process ===
+[2025-03-25 11:03:15] Serial port None opened at 115200 baud
+[2025-03-25 11:03:15] Attempt 1/12 for command: A
+[2025-03-25 11:03:15] Error sending A: Attempting to use a port that is not open
+[2025-03-25 11:03:15] === Dial-Up Process Completed ===
+[2025-03-25 11:03:48] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:03:48] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:03:48] === Starting Dial-Up Process ===
+[2025-03-25 11:03:48] Serial port None opened at 115200 baud
+[2025-03-25 11:03:48] Attempt 1/12 for command: A
+[2025-03-25 11:03:48] Error sending A: Attempting to use a port that is not open
+[2025-03-25 11:03:48] === Dial-Up Process Completed ===
+[2025-03-25 11:04:13] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:04:13] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:04:21] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:04:21] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:04:21] === Starting Dial-Up Process ===
+[2025-03-25 11:04:21] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:04:21] Attempt 1/12 for command: A
+[2025-03-25 11:04:21] Sent: A
+[2025-03-25 11:04:26] Timeout: A -> Response: A
++CME ERROR: 4
+[2025-03-25 11:04:27] Attempt 2/12 for command: A
+[2025-03-25 11:04:27] Sent: A
+[2025-03-25 11:05:34] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:05:34] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:05:34] === Starting Dial-Up Process ===
+[2025-03-25 11:05:34] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:05:34] Attempt 1/3 for command: A
+[2025-03-25 11:05:34] Sent: A
+[2025-03-25 11:06:19] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:06:19] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:06:19] === Starting Dial-Up Process ===
+[2025-03-25 11:06:19] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:06:19] Attempt 1/3 for command: AT
+[2025-03-25 11:06:32] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:06:32] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:06:32] === Starting Dial-Up Process ===
+[2025-03-25 11:06:32] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:06:32] Attempt 1/3 for command: A
+[2025-03-25 11:06:32] Sent: A
+[2025-03-25 11:07:20] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:07:20] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:07:20] === Starting Dial-Up Process ===
+[2025-03-25 11:07:20] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:07:20] Attempt 1/3 for command: AT
+[2025-03-25 11:07:20] Sent: AT
+[2025-03-25 11:07:20] Success: AT -> Received: OK
+[2025-03-25 11:07:20] === Dial-Up Process Completed ===
+[2025-03-25 11:07:33] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:07:33] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:07:33] === Starting Dial-Up Process ===
+[2025-03-25 11:07:33] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:07:33] Attempt 1/3 for command: AT
+[2025-03-25 11:07:33] Sent: AT
+[2025-03-25 11:07:33] Success: AT -> Received: OK
+[2025-03-25 11:07:33] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:07:33] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:07:34] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:07:34] Attempt 1/3 for command: AT+QCFG
+[2025-03-25 11:07:34] Sent: AT+QCFG
+[2025-03-25 11:07:39] Timeout: AT+QCFG -> Response: AT+QCFG
++CME ERROR: 4
+[2025-03-25 11:07:40] Attempt 2/3 for command: AT+QCFG
+[2025-03-25 11:07:40] Sent: AT+QCFG
+[2025-03-25 11:07:45] Timeout: AT+QCFG -> Response: AT+QCFG
++CME ERROR: 4
+[2025-03-25 11:07:46] Attempt 3/3 for command: AT+QCFG
+[2025-03-25 11:07:46] Sent: AT+QCFG
+[2025-03-25 11:08:25] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:08:25] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:08:25] === Starting Dial-Up Process ===
+[2025-03-25 11:08:25] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:08:25] Attempt 1/3 for command: AT
+[2025-03-25 11:08:25] Sent: AT
+[2025-03-25 11:08:25] Success: AT -> Received: OK
+[2025-03-25 11:08:25] Attempt 1/3 for command: AT+CGDCONT=1,"IP","{APN}"
+[2025-03-25 11:08:25] Sent: AT+CGDCONT=1,"IP","{APN}"
+[2025-03-25 11:08:26] Success: AT+CGDCONT=1,"IP","{APN}" -> Received: OK
+[2025-03-25 11:08:26] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:08:26] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:08:26] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:08:26] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:08:26] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:08:26] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:08:26] === Dial-Up Process Completed ===
+[2025-03-25 11:08:58] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:08:58] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:08:58] === Starting Dial-Up Process ===
+[2025-03-25 11:08:58] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:08:58] Attempt 1/3 for command: AT
+[2025-03-25 11:08:58] Sent: AT
+[2025-03-25 11:08:58] Success: AT -> Received: OK
+[2025-03-25 11:08:58] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:08:58] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:08:59] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:08:59] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:08:59] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:08:59] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:08:59] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:08:59] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:08:59] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:08:59] === Dial-Up Process Completed ===
+[2025-03-25 11:09:22] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:09:22] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:09:22] === Starting Dial-Up Process ===
+[2025-03-25 11:09:22] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:09:22] down network interface enxe6d71579a286
+[2025-03-25 11:09:22] Attempt 1/3 for command: AT
+[2025-03-25 11:09:22] Sent: AT
+[2025-03-25 11:09:22] Success: AT -> Received: OK
+[2025-03-25 11:09:22] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:09:22] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:09:23] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:09:23] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:09:23] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:09:23] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:09:23] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:09:23] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:09:23] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:09:23] up network interface enxe6d71579a286
+[2025-03-25 11:09:23] === Dial-Up Process Completed ===
+[2025-03-25 11:14:50] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:14:50] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:14:50] === Starting Dial-Up Process ===
+[2025-03-25 11:14:50] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:14:50] down network interface enxe6d71579a286
+[2025-03-25 11:14:50] Command failed (exit code 2):
+[2025-03-25 11:14:50] Error output: RTNETLINK answers: Operation not permitted
+[2025-03-25 11:14:50] Error: Down interfaces failed
+[2025-03-25 11:16:49] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:16:49] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:16:49] === Starting Dial-Up Process ===
+[2025-03-25 11:16:49] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:16:49] down network interface enxe6d71579a286
+[2025-03-25 11:16:49] Error output: RTNETLINK answers: Operation not permitted
+[2025-03-25 11:16:49] Error: Down interfaces failed
+[2025-03-25 11:17:38] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:17:38] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:17:38] === Starting Dial-Up Process ===
+[2025-03-25 11:17:38] Failed to open serial port: module 'serial' has no attribute 'Serial'
+[2025-03-25 11:23:40] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:23:40] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:23:40] === Starting Dial-Up Process ===
+[2025-03-25 11:23:40] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:23:40] Error: Down interfaces failed
+[2025-03-25 11:24:17] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:24:17] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:24:17] === Starting Dial-Up Process ===
+[2025-03-25 11:24:17] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:24:17] down network interface enxe6d71579a286
+[2025-03-25 11:24:17] Command executed successfully: 123 | sudo ip link set dev enxe6d71579a286 down
+[2025-03-25 11:24:17] Attempt 1/3 for command: AT
+[2025-03-25 11:24:17] Sent: AT
+[2025-03-25 11:24:18] Success: AT -> Received: OK
+[2025-03-25 11:24:18] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:24:18] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:24:19] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:24:19] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:24:19] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:24:19] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:24:19] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:24:19] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:24:19] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:24:19] up network interface enxe6d71579a286
+[2025-03-25 11:24:19] Command executed successfully: 123 | sudo ip link set dev enxe6d71579a286 up
+[2025-03-25 11:24:19] === Dial-Up Process Completed ===
+[2025-03-25 11:26:03] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:26:03] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:26:03] === Starting Dial-Up Process ===
+[2025-03-25 11:26:04] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:26:04] down network interface enxe6d71579a286
+[2025-03-25 11:26:04] Warning: Failed to down interfaces: [Errno 2] No such file or directory: 'echo 123 | sudo ip link set dev enxe6d71579a286 down'
+[2025-03-25 11:26:04] Error: Down interfaces failed
+[2025-03-25 11:26:35] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:26:35] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:26:35] === Starting Dial-Up Process ===
+[2025-03-25 11:26:35] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:26:35] down network interface enxe6d71579a286
+[2025-03-25 11:26:35] Warning: Failed to down interfaces: [Errno 2] No such file or directory: 'sudo ip link set dev enxe6d71579a286 down'
+[2025-03-25 11:26:35] Error: Down interfaces failed
+[2025-03-25 11:27:19] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:27:19] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:27:19] === Starting Dial-Up Process ===
+[2025-03-25 11:27:19] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:27:19] down network interface enx6616f3a85824
+[2025-03-25 11:27:19] Warning: Failed to down interfaces: [Errno 2] No such file or directory: 'echo 123 | sudo ip link set dev enx6616f3a85824 down'
+[2025-03-25 11:27:19] Error: Down interfaces failed
+[2025-03-25 11:27:33] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:27:33] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:27:33] === Starting Dial-Up Process ===
+[2025-03-25 11:27:33] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:27:33] down network interface enx6616f3a85824
+[2025-03-25 11:27:33] Warning: Failed to down interfaces: [Errno 2] No such file or directory: 'sudo ip link set dev enx6616f3a85824 down'
+[2025-03-25 11:27:33] Error: Down interfaces failed
+[2025-03-25 11:28:07] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:28:07] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:28:07] === Starting Dial-Up Process ===
+[2025-03-25 11:28:07] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:28:07] down network interface enx6616f3a85824
+[2025-03-25 11:28:07] Command executed successfully: 
+[2025-03-25 11:28:07] === Dial-Up Process Completed ===
+[2025-03-25 11:29:28] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:29:28] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:29:28] === Starting Dial-Up Process ===
+[2025-03-25 11:29:28] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:29:28] down network interface enx6616f3a85824
+[2025-03-25 11:29:28] Command executed successfully: 
+[2025-03-25 11:29:29] Attempt 1/3 for command: AT
+[2025-03-25 11:29:29] Sent: AT
+[2025-03-25 11:29:34] Timeout: AT -> Response: AT
++CME ERROR: 4
+[2025-03-25 11:29:35] Attempt 2/3 for command: AT
+[2025-03-25 11:29:35] Sent: AT
+[2025-03-25 11:29:35] Success: AT -> Received: OK
+[2025-03-25 11:29:35] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:29:35] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:29:36] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:29:36] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:29:36] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:29:36] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:29:36] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:29:36] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:29:37] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:29:38] up network interface enx6616f3a85824
+[2025-03-25 11:29:38] Command executed successfully: 
+[2025-03-25 11:29:38] === Dial-Up Process Completed ===
+[2025-03-25 11:35:49] Error: Failed to read config.json: Extra data: line 7 column 1 (char 96)
+[2025-03-25 11:36:17] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:36:17] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:36:17] ========= Starting Dial-Up Process =========
+[2025-03-25 11:36:17] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:36:17] down network interface enx6616f3a85824
+[2025-03-25 11:36:17] Command executed successfully: 
+[2025-03-25 11:36:18] Attempt 1/3 for command: AT
+[2025-03-25 11:36:18] Sent: AT
+[2025-03-25 11:36:23] Timeout: AT -> Response: 
+[2025-03-25 11:36:24] Attempt 2/3 for command: AT
+[2025-03-25 11:36:24] Sent: AT
+[2025-03-25 11:36:29] Timeout: AT -> Response: 
+[2025-03-25 11:36:30] Attempt 3/3 for command: AT
+[2025-03-25 11:36:30] Sent: AT
+[2025-03-25 11:36:35] Timeout: AT -> Response: 
+[2025-03-25 11:36:36] Error: Failed after 3 attempts for command: AT
+[2025-03-25 11:36:38] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:36:38] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:36:38] ========= Starting Dial-Up Process =========
+[2025-03-25 11:36:38] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:36:38] down network interface enx6616f3a85824
+[2025-03-25 11:36:38] Command executed successfully: 
+[2025-03-25 11:36:39] Attempt 1/3 for command: AT
+[2025-03-25 11:36:39] Sent: AT
+[2025-03-25 11:36:39] Success: AT -> Received: OK
+[2025-03-25 11:36:39] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:36:39] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:36:40] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:36:40] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:36:40] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:36:40] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:36:40] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:36:40] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:36:40] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:36:41] up network interface enx6616f3a85824
+[2025-03-25 11:36:41] Command executed successfully: 
+[2025-03-25 11:36:41] === Dial-Up Process Completed ===
+[2025-03-25 11:39:01] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:39:01] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:39:01] ========= Starting Dial-Up Process =========
+[2025-03-25 11:39:01] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:39:01] down network interface enx6616f3a85824
+[2025-03-25 11:39:01] Command executed successfully: 
+[2025-03-25 11:39:02] Attempt 1/3 for command: AT
+[2025-03-25 11:39:02] Sent: AT
+[2025-03-25 11:39:02] Success: AT -> Received: OK
+[2025-03-25 11:39:02] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:39:02] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:39:02] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:39:02] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:39:02] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:39:03] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:39:03] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:39:03] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:39:03] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:39:04] up network interface enx6616f3a85824
+[2025-03-25 11:39:04] Command executed successfully: 
+[2025-03-25 11:39:05] Attempting to obtain IP on enx6616f3a85824 (Attempt 1/3)
+[2025-03-25 11:39:20] Error output: udhcpc: started, v1.30.1
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: no lease, failing
+[2025-03-25 11:39:20] === Dial-Up Process Completed ===
+[2025-03-25 11:41:36] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:41:36] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:41:36] ========= Starting Dial-Up Process =========
+[2025-03-25 11:41:36] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:41:36] down network interface enxaa0dc05c41d8
+[2025-03-25 11:41:36] Command executed successfully: down interface enxaa0dc05c41d8
+[2025-03-25 11:41:37] Attempt 1/3 for command: AT
+[2025-03-25 11:41:37] Sent: AT
+[2025-03-25 11:41:37] Success: AT -> Received: OK
+[2025-03-25 11:41:37] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:41:37] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:41:38] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:41:38] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:41:38] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:41:38] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:41:38] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:41:38] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:41:38] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:41:39] up network interface enxaa0dc05c41d8
+[2025-03-25 11:41:39] Command executed successfully: up interface enxaa0dc05c41d8
+[2025-03-25 11:41:40] Attempting to obtain IP on enxaa0dc05c41d8 (Attempt 1/3)
+[2025-03-25 11:41:40] Command executed successfully: 
+[2025-03-25 11:41:40] Attempting to obtain IP on enxaa0dc05c41d8 (Attempt 2/3)
+[2025-03-25 11:41:40] Command executed successfully: 
+[2025-03-25 11:41:40] Attempting to obtain IP on enxaa0dc05c41d8 (Attempt 3/3)
+[2025-03-25 11:41:41] Command executed successfully: 
+[2025-03-25 11:41:41] === Dial-Up Process Completed ===
+[2025-03-25 11:53:35] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:53:35] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:53:35] ========= Starting Dial-Up Process =========
+[2025-03-25 11:53:35] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:53:35] down network interface enxe2844e85f719
+[2025-03-25 11:53:39] Command executed successfully: down interface enxe2844e85f719
+[2025-03-25 11:53:40] Attempt 1/3 for command: AT
+[2025-03-25 11:53:40] Sent: AT
+[2025-03-25 11:53:45] Timeout: AT -> Response: +QINAT
++CME ERROR: 4
+[2025-03-25 11:53:46] Attempt 2/3 for command: AT
+[2025-03-25 11:53:46] Sent: AT
+[2025-03-25 11:53:46] Success: AT -> Received: OK
+[2025-03-25 11:53:46] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:53:46] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:53:46] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:53:46] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:53:46] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:53:47] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:53:47] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:53:47] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:53:47] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:53:48] up network interface enxe2844e85f719
+[2025-03-25 11:53:48] Command executed successfully: up interface enxe2844e85f719
+[2025-03-25 11:53:49] Attempting to obtain IP on enxe2844e85f719 (Attempt 1/3)
+[2025-03-25 11:53:49] Command executed successfully: udhcpc ip address for enxe2844e85f719
+[2025-03-25 11:53:49] === Dial-Up Process Completed ===
+[2025-03-25 11:55:48] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:55:48] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:55:48] ========= Starting Dial-Up Process =========
+[2025-03-25 11:55:48] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:55:48] down network interface enxe2844e85f719
+[2025-03-25 11:55:48] Command executed successfully: down interface enxe2844e85f719
+[2025-03-25 11:55:49] Attempt 1/3 for command: AT
+[2025-03-25 11:55:49] Sent: AT
+[2025-03-25 11:55:54] Timeout: AT -> Response: AT
++CME ERROR: 4
+[2025-03-25 11:55:55] Attempt 2/3 for command: AT
+[2025-03-25 11:55:55] Sent: AT
+[2025-03-25 11:55:55] Success: AT -> Received: OK
+[2025-03-25 11:55:55] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:55:55] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:55:56] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:55:56] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:55:56] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:55:56] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:55:56] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:55:56] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:55:57] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:55:58] up network interface enxe2844e85f719
+[2025-03-25 11:55:58] Command executed successfully: up interface enxe2844e85f719
+[2025-03-25 11:55:59] Attempting to obtain IP on enxe2844e85f719 (Attempt 1/3)
+[2025-03-25 11:56:14] Error output: udhcpc: started, v1.30.1
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: sending discover
+udhcpc: no lease, failing
+[2025-03-25 11:56:14] Attempting to obtain IP on enxe2844e85f719 (Attempt 2/3)
+[2025-03-25 11:57:02] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 11:57:02] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 11:57:02] ========= Starting Dial-Up Process =========
+[2025-03-25 11:57:02] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 11:57:02] down network interface enxda6140f2437b
+[2025-03-25 11:57:02] Command executed successfully: down interface enxda6140f2437b
+[2025-03-25 11:57:03] Attempt 1/3 for command: AT
+[2025-03-25 11:57:03] Sent: AT
+[2025-03-25 11:57:08] Timeout: AT -> Response: AT
+
+
++QUSIM: 1
+
++CPIN: READY
+
++QIND: PB DONE
+
++QIND: SMS DONE
+
++CFUN: 1
+
+RDY
+[2025-03-25 11:57:09] Attempt 2/3 for command: AT
+[2025-03-25 11:57:09] Sent: AT
+[2025-03-25 11:57:09] Success: AT -> Received: OK
+[2025-03-25 11:57:09] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:57:09] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 11:57:10] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 11:57:10] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 11:57:10] Sent: AT+QCFG="usbnet",1
+[2025-03-25 11:57:10] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 11:57:10] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:57:10] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 11:57:10] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 11:57:11] up network interface enxda6140f2437b
+[2025-03-25 11:57:11] Command executed successfully: up interface enxda6140f2437b
+[2025-03-25 11:57:12] Attempting to obtain IP on enxda6140f2437b (Attempt 1/3)
+[2025-03-25 11:57:12] Command executed successfully: udhcpc ip address for enxda6140f2437b
+[2025-03-25 11:57:12] === Dial-Up Process Completed ===
+[2025-03-25 12:00:30] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 12:00:30] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 12:00:30] ========= Starting Dial-Up Process =========
+[2025-03-25 12:00:30] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 12:00:30] down network interface enx9e2e9f82c2a6
+[2025-03-25 12:00:30] Command executed successfully: down interface enx9e2e9f82c2a6
+[2025-03-25 12:00:31] Attempt 1/3 for command: AT
+[2025-03-25 12:00:31] Sent: AT
+[2025-03-25 12:00:37] Timeout: AT -> Response: AT
++CME ERROR: 4
+[2025-03-25 12:00:38] Attempt 2/3 for command: AT
+[2025-03-25 12:00:38] Sent: AT
+[2025-03-25 12:00:38] Success: AT -> Received: OK
+[2025-03-25 12:00:38] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 12:00:38] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 12:00:38] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 12:00:38] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 12:00:38] Sent: AT+QCFG="usbnet",1
+[2025-03-25 12:00:38] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 12:00:38] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 12:00:38] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 12:00:38] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 12:00:39] up network interface enx9e2e9f82c2a6
+[2025-03-25 12:00:39] Command executed successfully: up interface enx9e2e9f82c2a6
+[2025-03-25 12:00:40] Attempting to obtain IP on enx9e2e9f82c2a6 (Attempt 1/3)
+[2025-03-25 12:00:41] Command executed successfully: udhcpc ip address for enx9e2e9f82c2a6
+[2025-03-25 12:00:41] === Dial-Up Process Completed ===
+[2025-03-25 12:12:01] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-25 12:12:01] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-25 12:12:01] ========= Starting Dial-Up Process =========
+[2025-03-25 12:12:01] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-25 12:12:01] down network interface enx32323a37112b
+[2025-03-25 12:12:03] Command executed successfully: down interface enx32323a37112b
+[2025-03-25 12:12:04] Attempt 1/3 for command: AT
+[2025-03-25 12:12:04] Sent: AT
+[2025-03-25 12:12:04] Success: AT -> Received: OK
+[2025-03-25 12:12:04] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 12:12:04] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-25 12:12:06] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-25 12:12:06] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-25 12:12:06] Sent: AT+QCFG="usbnet",1
+[2025-03-25 12:12:06] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-25 12:12:06] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-25 12:12:06] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-25 12:12:06] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-25 12:12:07] up network interface enx32323a37112b
+[2025-03-25 12:12:07] Command executed successfully: up interface enx32323a37112b
+[2025-03-25 12:12:08] Attempting to obtain IP on enx32323a37112b (Attempt 1/3)
+[2025-03-25 12:12:09] Command executed successfully: udhcpc ip address for enx32323a37112b
+[2025-03-25 12:12:09] === Dial-Up Process Completed ===
+[2025-03-26 10:04:56] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-26 10:04:56] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-26 10:04:56] ========= Starting Dial-Up Process =========
+[2025-03-26 10:04:56] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-26 10:04:56] down network interface enx661c45a5b493
+[2025-03-26 10:04:58] Command executed successfully: down interface enx661c45a5b493
+[2025-03-26 10:04:59] Attempt 1/3 for command: AT
+[2025-03-26 10:04:59] Sent: AT
+[2025-03-26 10:05:04] Timeout: AT -> Response: AT
++CME ERROR: 4
+[2025-03-26 10:05:05] Attempt 2/3 for command: AT
+[2025-03-26 10:05:05] Sent: AT
+[2025-03-26 10:05:05] Success: AT -> Received: OK
+[2025-03-26 10:05:05] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-26 10:05:05] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-26 10:05:06] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-26 10:05:06] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-26 10:05:06] Sent: AT+QCFG="usbnet",1
+[2025-03-26 10:05:07] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-26 10:05:07] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-26 10:05:07] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-26 10:05:07] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-26 10:05:08] up network interface enx661c45a5b493
+[2025-03-26 10:05:08] Command executed successfully: up interface enx661c45a5b493
+[2025-03-26 10:05:09] Attempting to obtain IP on enx661c45a5b493 (Attempt 1/3)
+[2025-03-26 10:05:09] Command executed successfully: udhcpc ip address for enx661c45a5b493
+[2025-03-26 10:05:09] === Dial-Up Process Completed ===
+[2025-03-26 10:08:38] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-26 10:08:38] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-26 10:08:38] ========= Starting Dial-Up Process =========
+[2025-03-26 10:08:38] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-26 10:08:38] down network interface enxf637a1a1d37b
+[2025-03-26 10:08:38] Command executed successfully: down interface enxf637a1a1d37b
+[2025-03-26 10:08:39] Attempt 1/3 for command: AT
+[2025-03-26 10:08:39] Sent: AT
+[2025-03-26 10:08:44] Timeout: AT -> Response: AT
++CME ERROR: 4
+[2025-03-26 10:08:45] Attempt 2/3 for command: AT
+[2025-03-26 10:08:45] Sent: AT
+[2025-03-26 10:08:45] Success: AT -> Received: OK
+[2025-03-26 10:08:45] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-26 10:08:45] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-26 10:08:45] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-26 10:08:45] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-26 10:08:45] Sent: AT+QCFG="usbnet",1
+[2025-03-26 10:08:46] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-26 10:08:46] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-26 10:08:46] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-26 10:08:46] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-26 10:08:47] up network interface enxf637a1a1d37b
+[2025-03-26 10:08:47] Command executed successfully: up interface enxf637a1a1d37b
+[2025-03-26 10:08:48] Attempting to obtain IP on enxf637a1a1d37b (Attempt 1/3)
+[2025-03-26 10:08:48] Command executed successfully: udhcpc ip address for enxf637a1a1d37b
+[2025-03-26 10:08:48] === Dial-Up Process Completed ===
+[2025-03-26 12:07:12] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-26 12:07:12] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-26 12:07:12] ========= Starting Dial-Up Process =========
+[2025-03-26 12:07:12] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-26 12:07:12] down network interface enxca5dc0aca3d0
+[2025-03-26 12:07:13] Command executed successfully: down interface enxca5dc0aca3d0
+[2025-03-26 12:07:14] Attempt 1/3 for command: AT
+[2025-03-26 12:07:14] Sent: AT
+[2025-03-26 12:07:19] Timeout: AT -> Response: AT
++CME ERROR: 4
+[2025-03-26 12:07:20] Attempt 2/3 for command: AT
+[2025-03-26 12:07:20] Sent: AT
+[2025-03-26 12:07:20] Success: AT -> Received: OK
+[2025-03-26 12:07:20] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-26 12:07:20] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-26 12:07:21] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-26 12:07:21] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-26 12:07:21] Sent: AT+QCFG="usbnet",1
+[2025-03-26 12:07:21] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-26 12:07:21] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-26 12:07:21] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-26 12:07:22] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-26 12:07:23] up network interface enxca5dc0aca3d0
+[2025-03-26 12:07:23] Command executed successfully: up interface enxca5dc0aca3d0
+[2025-03-26 12:07:24] Attempting to obtain IP on enxca5dc0aca3d0 (Attempt 1/3)
+[2025-03-26 12:07:24] Command executed successfully: udhcpc ip address for enxca5dc0aca3d0
+[2025-03-26 12:07:24] === Dial-Up Process Completed ===

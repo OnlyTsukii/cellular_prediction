@@ -1,0 +1,12 @@
+at+qnwprefcfg="mode_pref",AUTO
+
+at+qnwprefcfg="mode_pref",LTE
+
+AT+QNWCFG="lte_csi"
+
+AT+QNWCFG="nr5g_csi"
+
+AT+QENG="servingcell"
+
+AT+QCAINFO
+

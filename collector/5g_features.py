@@ -9,16 +9,23 @@ import json
 from collections import defaultdict
 from labels import LabelsCollector
 
+
+AT_QENG_SERVING = 0
+AT_QENG_NEIGHBOUR = 1
+AT_QCAINFO = 2
+AT_QNWINFO = 3
+AT_QNWCFG = 4
+
 BAUD_RATE = 115200
 PREFIX = '/home/ccl/cellular_prediction/dataset/5g'
 
 CSV_HEADER = [
     "timestamp", "network_mode", "state", "duplex_mode", 
-    "cell_id", "rsrp", "rsrq", "sinr", "max_neighbor_rsrp",
-    "max_neighbor_rsrq", "max_neighbor_sinr", "avg_neighbor_rsrp",
-    "avg_neighbor_rsrq", "avg_neighbor_sinr", "bandwidth",
-    "cell_changed", "rssi", "band", "ul_bandwidth", 
-    "ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
+    "cell_id", "rsrp", "rsrq", "sinr", "tx_power", 
+    "max_neighbor_rsrp", "max_neighbor_rsrq", "max_neighbor_sinr", 
+    "avg_neighbor_rsrp", "avg_neighbor_rsrq", "avg_neighbor_sinr", 
+    "bandwidth", "cell_changed", "rssi", "band", "mcs",
+    "ul_bandwidth", "ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
 ]
 
 def parse_servingcell(response):
@@ -39,7 +46,8 @@ def parse_servingcell(response):
             rsrp = ''
             rsrq = ''
             sinr = ''
-            bandwidth = ""
+            bandwidth = ''
+            tx_power = ''
 
             if len(parts) == 2:
                 last_state = parts[1]
@@ -57,6 +65,7 @@ def parse_servingcell(response):
                 rsrq = parts[13]
                 sinr = parts[14]
                 bandwidth = parts[11]
+                tx_power = parts[15]
             elif parts[2] == '"LTE"':
                 net_mode = 'LTE'
                 state = parts[1]
@@ -66,6 +75,7 @@ def parse_servingcell(response):
                 rsrq = parts[14]
                 sinr = parts[16]
                 bandwidth = parts[11]
+                tx_power = parts[18]
             elif parts[0] == '"LTE"':
                 net_mode = 'EN-DC'
                 state = last_state
@@ -75,17 +85,19 @@ def parse_servingcell(response):
                 rsrq = parts[12]
                 sinr = parts[14]
                 bandwidth = parts[9]
+                tx_power = parts[16]
                 last_state = ''
                 
             return {
                 'network_mode': net_mode,
-                "state": state[1:-1],
-                "duplex_mode": duplex_mode[1:-1],
+                'state': state[1:-1],
+                'duplex_mode': duplex_mode[1:-1],
                 'cell_id': cell_id,
                 'rsrp': rsrp,
                 'rsrq': rsrq,
                 'sinr': sinr,
-                "bandwidth": bandwidth
+                'bandwidth': bandwidth,
+                'tx_power': tx_power
             }
         
         return None
@@ -128,25 +140,29 @@ def parse_neighborcell(response):
         'avg_sinr': int(sum(stats['sinr'])/len(stats['sinr'])) if stats['sinr'] else 0,
     }
 
-def parse_csq(response):
+def parse_qcainfo(response):
     try:
         for line in response.split('\n'):
-            if not line.startswith('+CSQ:'):
+            if not line.startswith('+QCAINFO:'):
                 continue
             
-            line = line.replace('+CSQ:', '').strip()
+            line = line.replace('+QCAINFO:', '').strip()
                 
             parts = [p.strip() for p in line.split(',')]
 
-            if len(parts) < 2:
+            if len(parts) < 10:
                 return None
             
-            return {
-                'csq_rssi': int(parts[0]),
-            }
+            print(parts)
+            
+            if parts[0] == '"PCC"':
+                return {
+                    'rssi': int(parts[8]),
+                }
+
         return None
     except Exception as e:
-        print(f"resolve csq failed: {str(e)}")
+        print(f"resolve qcainfo failed: {str(e)}")
         return None
     
 def parse_qnwinfo(response):
@@ -167,15 +183,52 @@ def parse_qnwinfo(response):
             }
         return None
     except Exception as e:
-        print(f"resolve csq failed: {str(e)}")
+        print(f"resolve qnwinfo failed: {str(e)}")
         return None
+    
+def parse_qnwcfg(response):
+    try:
+        for line in response.split('\n'):
+            if not line.startswith('+QNWCFG:'):
+                continue
+            
+            line = line.replace('+QNWCFG:', '').strip()
+                
+            parts = [p.strip() for p in line.split(',')]
+
+            if len(parts) < 4:
+                return None
+            
+            print(parts)
+            
+            return {
+                'mcs': parts[2],
+            }
+        return None
+    except Exception as e:
+        print(f"resolve qnwcfg failed: {str(e)}")
+        return None
+    
+def send_at_command(serial, type, cmd, expected):
+    serial.write(cmd.encode('utf-8') + b'\r\n')
+    response = serial.read_until(expected.encode('utf-8')).decode()
+    if type == AT_QENG_SERVING:
+        return parse_servingcell(response)
+    elif type == AT_QENG_NEIGHBOUR:
+        return parse_neighborcell(response)
+    elif type == AT_QCAINFO:
+        return parse_qcainfo(response)
+    elif type == AT_QNWINFO:
+        return parse_qnwinfo(response)
+    elif type == AT_QNWCFG:
+        return parse_qnwcfg(response)
 
 def main():
 
     with open('config.json', 'r') as file:
         config = json.load(file)
 
-    serial_port = config['Serial_5G']
+    serial_port = config['CELLULAR_PORT']
     
     ser = serial.Serial(
         port=serial_port,
@@ -199,31 +252,16 @@ def main():
         try:
             ts = time.time()
             
-            ser.write(b'AT+QENG="servingcell"\r\n')
-            serving_response = ser.read_until(b'OK').decode()
-            serving_data = parse_servingcell(serving_response)
-            
-            ser.write(b'AT+QENG="neighbourcell"\r\n')
-            neighbor_response = ser.read_until(b'OK').decode()
-            neighbor_data = parse_neighborcell(neighbor_response)
-
-            ser.write(b'AT+CSQ\r\n')
-            csq_response = ser.read_until(b'OK').decode()
-            csq_data = parse_csq(csq_response)
-
-            ser.write(b'AT+QNWINFO\r\n')
-            qnwinfo_response = ser.read_until(b'OK').decode()
-            qnwinfo_data = parse_qnwinfo(qnwinfo_response)
+            serving_data = send_at_command(ser, AT_QENG_SERVING, 'AT+QENG="servingcell"', 'OK')
+            neighbor_data = send_at_command(ser, AT_QENG_NEIGHBOUR, 'AT+QENG="neighbourcell"', 'OK')
+            cainfo_data = send_at_command(ser, AT_QCAINFO, 'AT+QCAINFO', 'OK')
+            qnwinfo_data = send_at_command(ser, AT_QNWINFO, 'AT+QNWINFO', 'OK')
             
             current_cell_id = serving_data['cell_id'] if serving_data else None
             cell_changed = 1 if current_cell_id and (current_cell_id != last_cell_id) else 0
             last_cell_id = current_cell_id
 
-            rssi = csq_data.get('csq_rssi', math.nan) if csq_data else math.nan
-            if not math.isnan(rssi):
-                rssi = int(rssi)
-            else:
-                rssi = 99
+            rssi = cainfo_data.get('rssi', 'N/A') if cainfo_data else 'N/A'
 
             ul_bandwidth = collector.ul_bandwidth
             ul_throughput = collector.ul_throughput
@@ -231,16 +269,24 @@ def main():
             retry = collector.retry
             cwnd = collector.cwnd
             loss_rate = collector.loss_rate
+
+            net_mode = serving_data.get('network_mode', 'N/A') if serving_data else 'N/A'
+            cfg_data = None
+            if net_mode == 'NR5G-SA':
+                cfg_data = send_at_command(ser, AT_QNWCFG, 'AT+QNWCFG="nr5g_ulMCS"', 'OK')
+            elif net_mode != 'N/A':
+                cfg_data = send_at_command(ser, AT_QNWCFG, 'AT+QNWCFG="lte_ulMCS"', 'OK')
             
             writer.writerow([
                 ts,
-                serving_data.get('network_mode', 'N/A') if serving_data else 'N/A',
+                net_mode,
                 serving_data.get('state', 'N/A') if serving_data else 'N/A',
                 serving_data.get('duplex_mode', 'N/A') if serving_data else 'N/A',
                 serving_data.get('cell_id', 'N/A') if serving_data else 'N/A',
                 serving_data.get('rsrp', 'N/A') if serving_data else 'N/A',
                 serving_data.get('rsrq', 'N/A') if serving_data else 'N/A',
                 serving_data.get('sinr', 'N/A') if serving_data else 'N/A', 
+                serving_data.get('tx_power', 'N/A') if serving_data else 'N/A', 
                 neighbor_data['max_rsrp'],
                 neighbor_data['max_rsrq'],
                 neighbor_data['max_sinr'],
@@ -251,6 +297,7 @@ def main():
                 cell_changed,
                 rssi,
                 qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A',
+                cfg_data.get('mcs', 'N/A') if qnwinfo_data else 'N/A',
                 ul_bandwidth,
                 ul_throughput,
                 rtt,
