@@ -8,5 +8,7 @@ AT+QNWCFG="nr5g_csi"
 
 AT+QENG="servingcell"
 
+AT+QENG="neighbourcell"
+
 AT+QCAINFO
 
