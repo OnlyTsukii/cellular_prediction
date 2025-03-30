@@ -636,3 +636,61 @@ RDY
 [2025-03-30 17:48:39] Attempting to obtain IP on enxd643b18f6e9b (Attempt 1/3)
 [2025-03-30 17:48:39] Command executed successfully: udhcpc ip address for enxd643b18f6e9b
 [2025-03-30 17:48:39] === Dial-Up Process Completed ===
+[2025-03-30 18:14:00] Error: Missing dependency: udhcpc
+[2025-03-30 18:14:10] Error: Missing dependency: jq
+[2025-03-30 18:20:18] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-30 18:20:18] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-30 18:20:26] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-30 18:20:26] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-30 18:20:26] ========= Starting Dial-Up Process =========
+[2025-03-30 18:20:26] Failed to open serial port: [Errno 16] could not open port /dev/ttyUSB2: [Errno 16] Device or resource busy: '/dev/ttyUSB2'
+[2025-03-30 18:21:15] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-30 18:21:15] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-30 18:21:15] ========= Starting Dial-Up Process =========
+[2025-03-30 18:21:15] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-30 18:21:15] down network interface eth1
+[2025-03-30 18:21:15] Command executed successfully: down interface eth1
+[2025-03-30 18:21:16] Attempt 1/3 for command: AT
+[2025-03-30 18:21:16] Sent: AT
+[2025-03-30 18:21:16] Success: AT -> Received: OK
+[2025-03-30 18:21:16] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-30 18:21:16] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-30 18:21:16] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-30 18:21:16] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-30 18:21:16] Sent: AT+QCFG="usbnet",1
+[2025-03-30 18:21:16] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-30 18:21:16] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-30 18:21:16] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-30 18:21:17] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-30 18:21:18] up network interface eth1
+[2025-03-30 18:21:18] Command executed successfully: up interface eth1
+[2025-03-30 18:21:19] Attempting to obtain IP on eth1 (Attempt 1/3)
+[2025-03-30 18:21:19] Command executed successfully: udhcpc ip address for eth1
+[2025-03-30 18:21:19] === Dial-Up Process Completed ===
+[2025-03-30 18:34:23] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-30 18:34:23] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-30 18:34:23] ========= Starting Dial-Up Process =========
+[2025-03-30 18:34:23] Failed to open serial port: [Errno 16] could not open port /dev/ttyUSB2: [Errno 16] Device or resource busy: '/dev/ttyUSB2'
+[2025-03-30 18:39:05] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-03-30 18:39:05] FOUND DEVICE: /dev/ttyUSB2
+[2025-03-30 18:39:05] ========= Starting Dial-Up Process =========
+[2025-03-30 18:39:05] Serial port /dev/ttyUSB2 opened at 115200 baud
+[2025-03-30 18:39:05] down network interface eth1
+[2025-03-30 18:39:05] Command executed successfully: down interface eth1
+[2025-03-30 18:39:06] Attempt 1/3 for command: AT
+[2025-03-30 18:39:06] Sent: AT
+[2025-03-30 18:39:07] Success: AT -> Received: OK
+[2025-03-30 18:39:07] Attempt 1/3 for command: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-30 18:39:07] Sent: AT+CGDCONT=1,"IP","cmnet"
+[2025-03-30 18:39:07] Success: AT+CGDCONT=1,"IP","cmnet" -> Received: OK
+[2025-03-30 18:39:07] Attempt 1/3 for command: AT+QCFG="usbnet",1
+[2025-03-30 18:39:07] Sent: AT+QCFG="usbnet",1
+[2025-03-30 18:39:07] Success: AT+QCFG="usbnet",1 -> Received: OK
+[2025-03-30 18:39:07] Attempt 1/3 for command: AT+QNETDEVCTL=1,1,1
+[2025-03-30 18:39:07] Sent: AT+QNETDEVCTL=1,1,1
+[2025-03-30 18:39:08] Success: AT+QNETDEVCTL=1,1,1 -> Received: OK
+[2025-03-30 18:39:09] up network interface eth1
+[2025-03-30 18:39:09] Command executed successfully: up interface eth1
+[2025-03-30 18:39:10] Attempting to obtain IP on eth1 (Attempt 1/3)
+[2025-03-30 18:39:10] Command executed successfully: udhcpc ip address for eth1
+[2025-03-30 18:39:10] === Dial-Up Process Completed ===

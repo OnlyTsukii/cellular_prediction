@@ -67,7 +67,7 @@ def send_at_command(ser, command, expected_response="OK", timeout=TIMEOUT):
         log(f"Error sending {command}: {str(e)}")
         return (False, str(e))
 
-def check_deps():
+def check_deps(config):
     """Check for required tools and devices"""
     global AT_DEVICE
     
@@ -77,9 +77,6 @@ def check_deps():
             die(f"Missing dependency: {tool}")
     
     try:
-        with open('config.json') as f:
-            config = json.load(f)
-        
         AT_DEVICE = config['CELLULAR_PORT']
         log(f"CONFIGURED DEVICE: {AT_DEVICE}")
 
@@ -92,17 +89,18 @@ def check_deps():
     except Exception as e:
         die(f"Failed to read config.json: {str(e)}")
 
-def operate_interfaces(action):
-    """Bring up or down all enx interfaces"""
+def operate_interfaces(action, config):
+    """Bring up or down all cellular interfaces"""
     try:
         if action != 'up' and action != 'down':
             log(f"Wrong interface action: {action}")
             return
         
+        prefix = config["INTERFACE_PREFIX"]
         result = subprocess.run(['ip', 'link', 'show'], capture_output=True, text=True)
         interfaces = [line.split(':')[1].strip() 
                      for line in result.stdout.split('\n') 
-                     if 'enx' in line and ':' in line]
+                     if prefix in line and ':' in line]
         
         for interface in interfaces:
             log(f"{action} network interface {interface}")
@@ -126,7 +124,7 @@ def operate_interfaces(action):
         log(f"Warning: Failed to {action} interfaces: {str(e)}")
         return False
 
-def dial_up():
+def dial_up(config):
     """Dial-up process for cellular device"""
     log("========= Starting Dial-Up Process =========")
 
@@ -142,7 +140,7 @@ def dial_up():
         log(f"Failed to open serial port: {str(e)}")
         return
     
-    if not operate_interfaces("down"):
+    if not operate_interfaces("down", config):
         die('Down interfaces failed')
 
     time.sleep(1)
@@ -162,16 +160,17 @@ def dial_up():
 
     time.sleep(1)
 
-    if not operate_interfaces("up"):
+    if not operate_interfaces("up", config):
         die('Up interfaces failed')
 
     time.sleep(1)
     
     try:
+        prefix = config["INTERFACE_PREFIX"]
         result = subprocess.run(['ip', 'link', 'show'], capture_output=True, text=True)
         interfaces = [line.split(':')[1].strip() 
                      for line in result.stdout.split('\n') 
-                     if 'enx' in line and ':' in line]
+                     if prefix in line and ':' in line]
         
         for interface in interfaces:
             for attempt in range(1, MAX_RETRIES + 1):
@@ -202,5 +201,9 @@ def dial_up():
 
 if __name__ == "__main__":
     import shutil  # Import here to use shutil.which for dependency checking
-    check_deps()
-    dial_up()
+
+    with open('config.json') as f:
+        config = json.load(f)
+
+    check_deps(config)
+    dial_up(config)

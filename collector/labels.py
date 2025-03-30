@@ -12,6 +12,7 @@ class LabelsCollector:
 
         self.server_ip = config["SERVER_IP"]
         self.tcp_port = config["TCP_PORT"]
+        self.interface = config["LOCAL_IP"]
 
         self.ul_bandwidth = math.nan
         self.rtt = math.nan
@@ -29,6 +30,7 @@ class LabelsCollector:
             "-p", str(self.tcp_port),
             "-t", "0",  # Infinite duration
             "-i", "1",
+            "-B", self.interface,
         ]
     
         print(cmd)
