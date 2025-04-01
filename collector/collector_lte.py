@@ -7,10 +7,12 @@ import os
 import json
 
 from collections import defaultdict
-from labels import LabelsCollector
+from collector.collector_transport import TransportCollector
+from utils import *
 
 BAUD_RATE = 115200
 PREFIX = '/home/ccl/cellular_prediction/dataset/lte'
+LOG_PREFIX = "collector_lte"
 
 CSV_HEADER = [
     "timestamp", "network_mode", "state", "duplex_mode", 
@@ -47,7 +49,7 @@ def parse_servingcell(response):
         
         return None
     except Exception as e:
-        print(f"resolve serving cell failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve serving cell failed: {str(e)}")
         return None
 
 def parse_neighborcell(response):
@@ -99,7 +101,7 @@ def parse_csq(response):
             }
         return None
     except Exception as e:
-        print(f"resolve csq failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve csq failed: {str(e)}")
         return None
     
 def parse_qnwinfo(response):
@@ -120,7 +122,7 @@ def parse_qnwinfo(response):
             }
         return None
     except Exception as e:
-        print(f"resolve csq failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve csq failed: {str(e)}")
         return None
 
 def main():
@@ -135,7 +137,7 @@ def main():
         timeout=1
     )
 
-    collector = LabelsCollector()
+    collector = TransportCollector()
     collector.start_services()
     
     last_cell_id = None
@@ -215,10 +217,10 @@ def main():
             time.sleep(1) 
         
         except KeyboardInterrupt:
-            print("\n user interrupted")
+            log(LOG_PREFIX, "user interrupted")
             break
         except Exception as e:
-            print(f"error: {str(e)}")
+            log(LOG_PREFIX, f"error: {str(e)}")
 
 if __name__ == "__main__":
     main()

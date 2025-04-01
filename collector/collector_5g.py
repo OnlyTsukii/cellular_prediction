@@ -7,9 +7,11 @@ import os
 import json
 
 from collections import defaultdict
-from labels import LabelsCollector
+from collector.collector_transport import TransportCollector
+from utils import *
 
 
+LOG_PREFIX = "collector_5g"
 AT_QENG_SERVING = 0
 AT_QENG_NEIGHBOUR = 1
 AT_QCAINFO = 2
@@ -25,7 +27,7 @@ CSV_HEADER = [
     "max_neighbor_rsrp", "max_neighbor_rsrq", "max_neighbor_sinr", 
     "avg_neighbor_rsrp", "avg_neighbor_rsrq", "avg_neighbor_sinr", 
     "bandwidth", "cell_changed", "rssi", "band", "mcs",
-    "ul_bandwidth", "ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
+    "ul_bandwidth", "ul_throughput", "raw_ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
 ]
 
 def parse_servingcell(response):
@@ -102,7 +104,7 @@ def parse_servingcell(response):
         
         return None
     except Exception as e:
-        print(f"resolve serving cell failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve serving cell failed: {str(e)}")
         return None
 
 def parse_neighborcell(response):
@@ -116,20 +118,20 @@ def parse_neighborcell(response):
             
         parts = [p.strip() for p in line.split(',')]
 
-        if len(parts) == 9:
-            if parts[4] != '-':
-                stats['rsrp'].append(float(parts[4]))
-            if parts[5] != '-':
-                stats['rsrq'].append(float(parts[5]))
-            if parts[6] != '-':
-                stats['sinr'].append(float(parts[6]))
-        elif len(parts) == 12 and parts[1] == 'LTE':
+        if len(parts) >= 12 and parts[1] == '"LTE"':
             if parts[4] != '-':
                 stats['rsrp'].append(float(parts[4]))
             if parts[5] != '-':
                 stats['rsrq'].append(float(parts[5]))
             if parts[7] != '-':
                 stats['sinr'].append(float(parts[7]))
+        elif len(parts) >= 9:
+            if parts[4] != '-':
+                stats['rsrp'].append(float(parts[4]))
+            if parts[5] != '-':
+                stats['rsrq'].append(float(parts[5]))
+            if parts[6] != '-':
+                stats['sinr'].append(float(parts[6]))
 
     return {
         'max_rsrq': int(max(stats['rsrq'])) if stats['rsrq'] else 0,
@@ -153,8 +155,6 @@ def parse_qcainfo(response):
             if len(parts) < 10:
                 return None
             
-            print(parts)
-            
             if parts[0] == '"PCC"':
                 return {
                     'rssi': int(parts[8]),
@@ -162,7 +162,7 @@ def parse_qcainfo(response):
 
         return None
     except Exception as e:
-        print(f"resolve qcainfo failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve qcainfo failed: {str(e)}")
         return None
     
 def parse_qnwinfo(response):
@@ -183,7 +183,7 @@ def parse_qnwinfo(response):
             }
         return None
     except Exception as e:
-        print(f"resolve qnwinfo failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve qnwinfo failed: {str(e)}")
         return None
     
 def parse_qnwcfg(response):
@@ -199,14 +199,12 @@ def parse_qnwcfg(response):
             if len(parts) < 4:
                 return None
             
-            print(parts)
-            
             return {
                 'mcs': parts[2],
             }
         return None
     except Exception as e:
-        print(f"resolve qnwcfg failed: {str(e)}")
+        log(LOG_PREFIX, f"resolve qnwcfg failed: {str(e)}")
         return None
     
 def send_at_command(serial, type, cmd, expected):
@@ -223,7 +221,7 @@ def send_at_command(serial, type, cmd, expected):
     elif type == AT_QNWCFG:
         return parse_qnwcfg(response)
 
-def main():
+def start_5g():
 
     with open('config.json', 'r') as file:
         config = json.load(file)
@@ -236,12 +234,12 @@ def main():
         timeout=1
     )
 
-    collector = LabelsCollector()
+    collector = TransportCollector()
     collector.start_services()
     
     last_cell_id = None
 
-    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    current_date = datetime.now().strftime('%Y-%m-%d')
     file_path = os.path.join(PREFIX, f'network_stats_{current_date}.csv')
     csv_file = open(file_path, 'a', newline='')
     writer = csv.writer(csv_file)
@@ -265,6 +263,7 @@ def main():
 
             ul_bandwidth = collector.ul_bandwidth
             ul_throughput = collector.ul_throughput
+            raw_ul_throughput = collector.raw_ul_throughput
             rtt = collector.rtt
             retry = collector.retry
             cwnd = collector.cwnd
@@ -300,6 +299,7 @@ def main():
                 cfg_data.get('mcs', 'N/A') if qnwinfo_data else 'N/A',
                 ul_bandwidth,
                 ul_throughput,
+                raw_ul_throughput,
                 rtt,
                 retry,
                 cwnd,
@@ -310,10 +310,7 @@ def main():
             time.sleep(1) 
         
         except KeyboardInterrupt:
-            print("\n user interrupted")
+            log(LOG_PREFIX, "user interrupted")
             break
         except Exception as e:
-            print(f"error: {str(e)}")
-
-if __name__ == "__main__":
-    main()
+            log(LOG_PREFIX, f"error: {str(e)}")

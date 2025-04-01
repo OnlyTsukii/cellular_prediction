@@ -4,8 +4,12 @@ import time
 import threading
 import math
 
+from utils import *
 
-class LabelsCollector:
+
+LOG_PREFIX = "collector_transport"
+
+class TransportCollector:
     def __init__(self):
         with open('config.json', 'r') as file:
             config = json.load(file)
@@ -16,6 +20,7 @@ class LabelsCollector:
 
         self.ul_bandwidth = math.nan
         self.rtt = math.nan
+        self.raw_ul_throughput = math.nan
         self.ul_throughput = math.nan
         self.retry = math.nan
         self.cwnd = math.nan
@@ -30,10 +35,11 @@ class LabelsCollector:
             "-p", str(self.tcp_port),
             "-t", "0",  # Infinite duration
             "-i", "1",
+            "-f", "k",
             "-B", self.interface,
         ]
     
-        print(cmd)
+        log(LOG_PREFIX, cmd)
 
         process = subprocess.Popen(
             cmd, 
@@ -48,7 +54,7 @@ class LabelsCollector:
                 if not line:
                     break
 
-                if "Mbits/sec" in line and "sender" not in line:
+                if "Kbits/sec" in line and "sender" not in line:
                     combine_data = line.split(' ')
                     combine_data = [s for s in combine_data if s != '']
                   
@@ -57,11 +63,14 @@ class LabelsCollector:
                     self.retry = int(float(combine_data[8]))
                     self.cwnd = float(combine_data[9])
 
+                    packets = self.ul_bandwidth * 1024 / 8 / 1500 - self.retry
+                    self.raw_ul_throughput = f"{(1460 * packets / 1024):.0f}"
+
                     sent_packets = (self.ul_bandwidth * 1e6) / (8 * 1500)
                     self.loss_rate = f"{(self.retry / sent_packets):.4f}"
 
             except Exception as e:
-                print(f"run_iperf_test error: {str(e)}")
+                log(LOG_PREFIX, f"run_iperf_test error: {str(e)}")
     
     def ping_monitor(self):
         """Continuously run ping and update RTT."""
@@ -85,32 +94,32 @@ class LabelsCollector:
                     self.rtt = math.nan
                         
             except Exception as e:
-                print(f"Ping monitor error: {str(e)}")
+                log(LOG_PREFIX, f"Ping monitor error: {str(e)}")
 
     def start_services(self):
         """Start all background services."""
         threading.Thread(target=self.run_iperf_test).start()
-        threading.Thread(target=self.ping_monitor).start()
+        # threading.Thread(target=self.ping_monitor).start()
 
-def main():
+# def main():
 
-    collector = LabelsCollector()
-    collector.start_services()
+#     collector = TransportCollector()
+#     collector.start_services()
     
-    while True:
-        try:
-            print(f"Uplink Bandwidth: {collector.ul_bandwidth:.2f} Mbits/sec")
-            print(f"Throughput: {collector.ul_throughput:.2f} MBytes")
-            print(f"RTT: {collector.rtt:.2f} ms")
-            print(f"Retry: {collector.retry} times")
-            print(f"CongestionWindow: {collector.cwnd} KBytes")
-            print(f"----------------------------------------------")
+#     while True:
+#         try:
+#             print(f"Uplink Bandwidth: {collector.ul_bandwidth:.2f} Kbits/sec")
+#             print(f"Throughput: {collector.ul_throughput:.2f} MBytes")
+#             print(f"RTT: {collector.rtt:.2f} ms")
+#             print(f"Retry: {collector.retry} times")
+#             print(f"CongestionWindow: {collector.cwnd} KBytes")
+#             print(f"----------------------------------------------")
             
-            time.sleep(1)
+#             time.sleep(1)
             
-        except KeyboardInterrupt:
-            print("\nMeasurement stopped.")
-            break
+#         except KeyboardInterrupt:
+#             print("\nMeasurement stopped.")
+#             break
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
