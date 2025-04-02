@@ -125,7 +125,7 @@ def parse_qnwinfo(response):
         log(LOG_PREFIX, f"resolve csq failed: {str(e)}")
         return None
 
-def main():
+def start_lte(local_ip):
     with open('config.json', 'r') as file:
         config = json.load(file)
 
@@ -137,7 +137,7 @@ def main():
         timeout=1
     )
 
-    collector = TransportCollector()
+    collector = TransportCollector(local_ip)
     collector.start_services()
     
     last_cell_id = None
@@ -221,6 +221,3 @@ def main():
             break
         except Exception as e:
             log(LOG_PREFIX, f"error: {str(e)}")
-
-if __name__ == "__main__":
-    main()

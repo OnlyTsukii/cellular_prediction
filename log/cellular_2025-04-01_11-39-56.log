@@ -1,0 +1,5 @@
+[2025-04-01 11:39:56][start_collector] Interface: enx9e79ab7d080f, IPv4: 10.226.178.146
+[2025-04-01 11:39:56][collector_transport] ['stdbuf', '-oL', 'iperf3', '-c', '8.133.248.39', '-p', '5201', '-t', '0', '-i', '1', '-f', 'k', '-B', '10.226.178.146']
+[2025-04-01 11:40:30][collector_5g] user interrupted
+[2025-04-01 11:40:30][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 11:40:30][collector_transport] run_iperf_test error: could not convert string to float: 'receiver\n'

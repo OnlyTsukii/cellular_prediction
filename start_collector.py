@@ -40,8 +40,9 @@ def main():
     if not ip:
         dial_up()
         time.sleep(1)
+        ip = get_enx_ipv4()
     
-    start_5g()
+    start_5g(ip, 1024)
 
 if __name__ == "__main__":
     main()

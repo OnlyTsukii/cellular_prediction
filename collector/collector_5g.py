@@ -221,7 +221,7 @@ def send_at_command(serial, type, cmd, expected):
     elif type == AT_QNWCFG:
         return parse_qnwcfg(response)
 
-def start_5g():
+def start_5g(local_ip, lines):
 
     with open('config.json', 'r') as file:
         config = json.load(file)
@@ -234,7 +234,7 @@ def start_5g():
         timeout=1
     )
 
-    collector = TransportCollector()
+    collector = TransportCollector(local_ip)
     collector.start_services()
     
     last_cell_id = None
@@ -246,7 +246,7 @@ def start_5g():
     if csv_file.tell() == 0:
         writer.writerow(CSV_HEADER)
     
-    while True:
+    while lines > 0:
         try:
             ts = time.time()
             
@@ -306,6 +306,8 @@ def start_5g():
                 loss_rate
             ])
             csv_file.flush()
+
+            lines -= 1
 
             time.sleep(1) 
         

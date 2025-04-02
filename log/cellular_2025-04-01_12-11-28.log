@@ -1,0 +1,16 @@
+[2025-04-01 12:11:28][start_collector] Interface: enxaa7485d2c5c4, IPv4: 10.186.192.64
+[2025-04-01 12:11:28][collector_transport] ['stdbuf', '-oL', 'iperf3', '-c', '8.133.248.39', '-p', '5201', '-t', '0', '-i', '1', '-f', 'k', '-B', '10.186.192.64']
+[2025-04-01 12:15:27][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:15:29][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:20:54][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:03][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:13][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:17][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:20][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:21][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:22][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:23][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:24][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:21:25][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:23:25][collector_transport] run_iperf_test error: float division by zero
+[2025-04-01 12:31:00][collector_transport] run_iperf_test error: could not convert string to float: 'receiver\n'

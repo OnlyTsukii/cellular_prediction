@@ -10,13 +10,13 @@ from utils import *
 LOG_PREFIX = "collector_transport"
 
 class TransportCollector:
-    def __init__(self):
+    def __init__(self, local_ip):
         with open('config.json', 'r') as file:
             config = json.load(file)
 
         self.server_ip = config["SERVER_IP"]
         self.tcp_port = config["TCP_PORT"]
-        self.interface = config["LOCAL_IP"]
+        self.interface = local_ip
 
         self.ul_bandwidth = math.nan
         self.rtt = math.nan
@@ -29,11 +29,11 @@ class TransportCollector:
     def run_iperf_test(self):
         """Run iperf3 test and continuously parse results."""
         cmd = [
-            "stdbuf", "-oL",  # Disable output buffering
+            "stdbuf", "-oL", 
             "iperf3",
             "-c", self.server_ip,
             "-p", str(self.tcp_port),
-            "-t", "0",  # Infinite duration
+            "-t", "0",  
             "-i", "1",
             "-f", "k",
             "-B", self.interface,

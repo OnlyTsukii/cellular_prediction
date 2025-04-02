@@ -1,6 +1,5 @@
 {
     "CELLULAR_PORT": "/dev/ttyUSB2",
     "SERVER_IP": "8.133.248.39",
-    "LOCAL_IP": "10.126.156.110",
     "TCP_PORT": 5201
 }
