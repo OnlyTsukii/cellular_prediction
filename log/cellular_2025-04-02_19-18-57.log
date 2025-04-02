@@ -1,0 +1,5 @@
+[2025-04-02 19:18:57][start_collector] Interface: enx96d7525661ce, IPv4: 10.11.136.59
+[2025-04-02 19:18:57][collector_transport] ['stdbuf', '-oL', 'iperf3', '-c', '8.133.248.39', '-p', '5201', '-t', '0', '-i', '1', '-f', 'k', '-B', '10.11.136.59']
+[2025-04-02 19:18:59][collector_5g] error: 'NoneType' object has no attribute 'get'
+[2025-04-02 19:20:48][collector_5g] user interrupted
+[2025-04-02 19:20:48][collector_transport] run_iperf_test error: could not convert string to float: 'receiver\n'

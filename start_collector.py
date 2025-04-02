@@ -42,7 +42,7 @@ def main():
         time.sleep(1)
         ip = get_enx_ipv4()
     
-    start_5g(ip, 1024)
+    start_5g(ip, 924)
 
 if __name__ == "__main__":
     main()
