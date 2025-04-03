@@ -59,27 +59,20 @@ def send_at_command(ser, command, expected_response="OK", timeout=TIMEOUT):
         log(LOG_PREFIX, f"Error sending {command}: {str(e)}")
         return (False, str(e))
 
-def check_device():
+def check_device(dev):
     global AT_DEVICE
     
-    try:
-        with open('config.json') as f:
-            config = json.load(f)
-        
-        AT_DEVICE = config['CELLULAR_PORT']
-        log(LOG_PREFIX, f"CONFIGURED DEVICE: {AT_DEVICE}")
+    AT_DEVICE = dev
+    log(LOG_PREFIX, f"CONFIGURED DEVICE: {AT_DEVICE}")
 
-        if not os.path.exists(AT_DEVICE):
-            AT_DEVICE = None
-            die("No valid devices found!")
-            
-        log(LOG_PREFIX, f"FOUND DEVICE: {AT_DEVICE}")
+    if not os.path.exists(AT_DEVICE):
+        AT_DEVICE = None
+        die("No valid devices found!")
         
-    except Exception as e:
-        die(f"Failed to read config.json: {str(e)}")
-
-def operate_interfaces(action):
-    """Bring up or down all enx interfaces"""
+    log(LOG_PREFIX, f"FOUND DEVICE: {AT_DEVICE}")
+        
+def operate_interfaces(action, prefix):
+    """Bring up or down all target interfaces"""
     try:
         if action != 'up' and action != 'down':
             log(LOG_PREFIX, f"Wrong interface action: {action}")
@@ -88,7 +81,7 @@ def operate_interfaces(action):
         result = subprocess.run(['ip', 'link', 'show'], capture_output=True, text=True)
         interfaces = [line.split(':')[1].strip() 
                      for line in result.stdout.split('\n') 
-                     if 'enx' in line and ':' in line]
+                     if prefix in line and ':' in line]
         
         for interface in interfaces:
             log(LOG_PREFIX, f"{action} network interface {interface}")
@@ -112,11 +105,11 @@ def operate_interfaces(action):
         log(LOG_PREFIX, f"Warning: Failed to {action} interfaces: {str(e)}")
         return False
 
-def dial_up():
+def dial_up(dev, prefix):
     """Dial-up process for cellular device"""
     log(LOG_PREFIX, "========= Starting Dial-Up Process =========")
 
-    check_device()
+    check_device(dev)
 
     try:
         ser = serial.Serial(
@@ -130,7 +123,7 @@ def dial_up():
         log(LOG_PREFIX, f"Failed to open serial port: {str(e)}")
         return
     
-    if not operate_interfaces("down"):
+    if not operate_interfaces("down", prefix):
         die('Down interfaces failed')
 
     time.sleep(1)
@@ -150,7 +143,7 @@ def dial_up():
 
     time.sleep(1)
 
-    if not operate_interfaces("up"):
+    if not operate_interfaces("up", prefix):
         die('Up interfaces failed')
 
     time.sleep(1)
@@ -159,7 +152,7 @@ def dial_up():
         result = subprocess.run(['ip', 'link', 'show'], capture_output=True, text=True)
         interfaces = [line.split(':')[1].strip() 
                      for line in result.stdout.split('\n') 
-                     if 'enx' in line and ':' in line]
+                     if prefix in line and ':' in line]
         
         for interface in interfaces:
             for attempt in range(1, MAX_RETRIES + 1):

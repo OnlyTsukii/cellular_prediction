@@ -1,5 +1,6 @@
 import netifaces
 import shutil
+import json
 
 from collector.collector_5g import start_5g
 from dial import dial_up
@@ -15,12 +16,12 @@ def check_deps():
         if not shutil.which(tool):
             log(LOG_PREFIX, f"Missing dependency: {tool}")
     
-def get_enx_ipv4():
+def get_interface_ipv4(prefix):
     interfaces = netifaces.interfaces()
-    enx_interfaces = [iface for iface in interfaces if iface.startswith('enx')]
+    enx_interfaces = [iface for iface in interfaces if iface.startswith(prefix)]
     
     if not enx_interfaces:
-        log(LOG_PREFIX, "No enx interface found")
+        log(LOG_PREFIX, f"No {prefix} interface found")
         return None
 
     for iface in enx_interfaces:
@@ -30,19 +31,25 @@ def get_enx_ipv4():
             log(LOG_PREFIX, f"Interface: {iface}, IPv4: {ip}")
             return ip
 
-    log(LOG_PREFIX, "No IPv4 address assigned to enx interface")
+    log(LOG_PREFIX, f"No IPv4 address assigned to {prefix} interface")
     return None
 
 def main():
     init_log()
 
-    ip = get_enx_ipv4()
+    with open('config.json') as f:
+        config = json.load(f)
+
+    intf_prefix = config['INTERFACE_PREFIX']
+    cellular_port = config['CELLULAR_PORT']
+
+    ip = get_interface_ipv4(intf_prefix)
     if not ip:
-        dial_up()
+        dial_up(cellular_port, intf_prefix)
         time.sleep(1)
-        ip = get_enx_ipv4()
+        ip = get_interface_ipv4(intf_prefix)
     
-    start_5g(ip, 924)
+    start_5g(1024, cellular_port, ip)
 
 if __name__ == "__main__":
     main()

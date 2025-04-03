@@ -1,0 +1,4 @@
+[2025-04-03 17:31:12][start_collector] No eth1 interface found
+[2025-04-03 17:31:12][dial] ========= Starting Dial-Up Process =========
+[2025-04-03 17:31:12][dial] CONFIGURED DEVICE: /dev/ttyUSB2
+[2025-04-03 17:31:12][dial] Error: No valid devices found!

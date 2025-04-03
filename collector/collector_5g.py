@@ -221,12 +221,7 @@ def send_at_command(serial, type, cmd, expected):
     elif type == AT_QNWCFG:
         return parse_qnwcfg(response)
 
-def start_5g(local_ip, lines):
-
-    with open('config.json', 'r') as file:
-        config = json.load(file)
-
-    serial_port = config['CELLULAR_PORT']
+def start_5g(lines, serial_port, ip):
     
     ser = serial.Serial(
         port=serial_port,
@@ -234,7 +229,7 @@ def start_5g(local_ip, lines):
         timeout=1
     )
 
-    collector = TransportCollector(local_ip)
+    collector = TransportCollector(ip)
     collector.start_services()
     
     last_cell_id = None

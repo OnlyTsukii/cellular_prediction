@@ -125,11 +125,7 @@ def parse_qnwinfo(response):
         log(LOG_PREFIX, f"resolve csq failed: {str(e)}")
         return None
 
-def start_lte(local_ip):
-    with open('config.json', 'r') as file:
-        config = json.load(file)
-
-    serial_port = config['Serial_LTE']
+def start_lte(lines, serial_port, ip):
     
     ser = serial.Serial(
         port=serial_port,
@@ -137,7 +133,7 @@ def start_lte(local_ip):
         timeout=1
     )
 
-    collector = TransportCollector(local_ip)
+    collector = TransportCollector(ip)
     collector.start_services()
     
     last_cell_id = None
@@ -149,7 +145,7 @@ def start_lte(local_ip):
     if csv_file.tell() == 0:
         writer.writerow(CSV_HEADER)
     
-    while True:
+    while lines > 0:
         try:
             ts = time.time()
             
@@ -214,6 +210,8 @@ def start_lte(local_ip):
             ])
             csv_file.flush()
 
+            lines -= 1
+
             time.sleep(1) 
         
         except KeyboardInterrupt:
@@ -221,3 +219,6 @@ def start_lte(local_ip):
             break
         except Exception as e:
             log(LOG_PREFIX, f"error: {str(e)}")
+
+if __name__ == "__main__":
+    main()
