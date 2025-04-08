@@ -63,7 +63,7 @@ class TransportCollector:
                     self.retry = int(float(combine_data[8]))
                     self.cwnd = float(combine_data[9])
 
-                    packets = self.ul_bandwidth * 1024 / 8 / 1500 - self.retry
+                    packets = self.ul_bandwidth * 1024 / 8 / 1500
                     self.raw_ul_throughput = f"{(1460 * packets / 1024):.0f}"
 
                     sent_packets = (self.ul_bandwidth * 1e6) / (8 * 1500)
