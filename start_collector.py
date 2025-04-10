@@ -11,7 +11,7 @@ LOG_PREFIX = "start_collector"
 
 def check_deps():
     """Check for required tools"""
-    required_tools = ['socat', 'udhcpc', 'jq']
+    required_tools = ['netperf']
     for tool in required_tools:
         if not shutil.which(tool):
             log(LOG_PREFIX, f"Missing dependency: {tool}")
@@ -31,7 +31,7 @@ def get_interface_ipv4(prefix):
             log(LOG_PREFIX, f"Interface: {iface}, IPv4: {ip}")
             return ip
 
-    log(LOG_PREFIX, f"No IPv4 address assigned to {prefix} interface")
+    log(LOG_PREFIX, f"No IPv4 address assigned to {prefix} interface, waiting...")
     return None
 
 def main():
@@ -45,10 +45,18 @@ def main():
 
     ip = get_interface_ipv4(intf_prefix)
     if not ip:
-        dial_up(cellular_port, intf_prefix)
-        time.sleep(1)
-        ip = get_interface_ipv4(intf_prefix)
+        cnt = 60
+        while cnt > 0:
+            time.sleep(1)
+            ip = get_interface_ipv4(intf_prefix)
+            if ip:
+                break
+            cnt -= 1
+        pass
     
+    if not ip:
+        log(LOG_PREFIX, f"No IPv4 address assigned to {intf_prefix} interface after 60 tries, exited.")
+
     start_5g(1024, cellular_port, ip)
 
 if __name__ == "__main__":

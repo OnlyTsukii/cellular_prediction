@@ -26,8 +26,7 @@ CSV_HEADER = [
     "cell_id", "rsrp", "rsrq", "sinr", "tx_power", 
     "max_neighbor_rsrp", "max_neighbor_rsrq", "max_neighbor_sinr", 
     "avg_neighbor_rsrp", "avg_neighbor_rsrq", "avg_neighbor_sinr", 
-    "bandwidth", "cell_changed", "rssi", "band", "mcs",
-    "ul_bandwidth", "ul_throughput", "raw_ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
+    "bandwidth", "cell_changed", "rssi", "band", "mcs", "ul_throughput"
 ]
 
 def parse_servingcell(response):
@@ -234,8 +233,8 @@ def start_5g(lines, serial_port, ip):
     
     last_cell_id = None
 
-    current_date = datetime.now().strftime('%Y-%m-%d')
-    file_path = os.path.join(PREFIX, f'network_stats_{current_date}.csv')
+    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    file_path = os.path.join(PREFIX, f'network_stats_{current_time}.csv')
     csv_file = open(file_path, 'a', newline='')
     writer = csv.writer(csv_file)
     if csv_file.tell() == 0:
@@ -256,13 +255,7 @@ def start_5g(lines, serial_port, ip):
 
             rssi = cainfo_data.get('rssi', 'N/A') if cainfo_data else 'N/A'
 
-            ul_bandwidth = collector.ul_bandwidth
             ul_throughput = collector.ul_throughput
-            raw_ul_throughput = collector.raw_ul_throughput
-            rtt = collector.rtt
-            retry = collector.retry
-            cwnd = collector.cwnd
-            loss_rate = collector.loss_rate
 
             net_mode = serving_data.get('network_mode', 'N/A') if serving_data else 'N/A'
             cfg_data = None
@@ -292,13 +285,7 @@ def start_5g(lines, serial_port, ip):
                 rssi,
                 qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A',
                 cfg_data.get('mcs', 'N/A') if qnwinfo_data else 'N/A',
-                ul_bandwidth,
                 ul_throughput,
-                raw_ul_throughput,
-                rtt,
-                retry,
-                cwnd,
-                loss_rate
             ])
             csv_file.flush()
 

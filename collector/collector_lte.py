@@ -19,8 +19,7 @@ CSV_HEADER = [
     "cell_id", "rsrp", "rsrq", "sinr", "max_neighbor_rsrp",
     "max_neighbor_rsrq", "max_neighbor_sinr", "avg_neighbor_rsrp",
     "avg_neighbor_rsrq", "avg_neighbor_sinr", "bandwidth",
-    "cell_changed", "rssi", "band", "ul_bandwidth", 
-    "ul_throughput", "rtt", "retry", "cwnd", "loss_rate"
+    "cell_changed", "rssi", "band", "ul_throughput"
 ]
 
 def parse_servingcell(response):
@@ -175,12 +174,7 @@ def start_lte(lines, serial_port, ip):
             else:
                 rssi = 99
 
-            ul_bandwidth = collector.ul_bandwidth
             ul_throughput = collector.ul_throughput
-            rtt = collector.rtt
-            retry = collector.retry
-            cwnd = collector.cwnd
-            loss_rate = collector.loss_rate
             
             writer.writerow([
                 ts,
@@ -201,12 +195,7 @@ def start_lte(lines, serial_port, ip):
                 cell_changed,
                 rssi,
                 qnwinfo_data.get('band', 'N/A') if qnwinfo_data else 'N/A',
-                ul_bandwidth,
                 ul_throughput,
-                rtt,
-                retry,
-                cwnd,
-                loss_rate
             ])
             csv_file.flush()
 
@@ -219,6 +208,3 @@ def start_lte(lines, serial_port, ip):
             break
         except Exception as e:
             log(LOG_PREFIX, f"error: {str(e)}")
-
-if __name__ == "__main__":
-    main()

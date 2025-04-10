@@ -18,25 +18,17 @@ class TransportCollector:
         self.tcp_port = config["TCP_PORT"]
         self.interface = ip
 
-        self.ul_bandwidth = math.nan
-        self.rtt = math.nan
-        self.raw_ul_throughput = math.nan
         self.ul_throughput = math.nan
-        self.retry = math.nan
-        self.cwnd = math.nan
-        self.loss_rate = math.nan
     
     def run_iperf_test(self):
-        """Run iperf3 test and continuously parse results."""
+        """Run netperf test and continuously parse results."""
         cmd = [
-            "stdbuf", "-oL",  # Disable output buffering
-            "iperf3",
-            "-c", self.server_ip,
-            "-p", str(self.tcp_port),
-            "-t", "0",  # Infinite duration
-            "-i", "1",
-            "-f", "k",
-            "-B", self.interface,
+            "netperf",
+            "-H", self.server_ip,
+            "-L", self.interface,
+            "-D", "0.8",
+            "-l", "0",
+            "-f", "k"
         ]
     
         log(LOG_PREFIX, cmd)
@@ -54,20 +46,10 @@ class TransportCollector:
                 if not line:
                     break
 
-                if "Kbits/sec" in line and "sender" not in line:
+                if "Interim" in line and "sender" not in line:
                     combine_data = line.split(' ')
-                    combine_data = [s for s in combine_data if s != '']
-                  
-                    self.ul_bandwidth = float(combine_data[6])
-                    self.ul_throughput = float(combine_data[4])
-                    self.retry = int(float(combine_data[8]))
-                    self.cwnd = float(combine_data[9])
-
-                    packets = self.ul_bandwidth * 1024 / 8 / 1500
-                    self.raw_ul_throughput = f"{(1460 * packets / 1024):.0f}"
-
-                    sent_packets = (self.ul_bandwidth * 1e6) / (8 * 1500)
-                    self.loss_rate = f"{(self.retry / sent_packets):.4f}"
+                    combine_data = [x.strip() for x in combine_data if x != '']
+                    self.ul_throughput= float(combine_data[2])
 
             except Exception as e:
                 log(LOG_PREFIX, f"run_iperf_test error: {str(e)}")
