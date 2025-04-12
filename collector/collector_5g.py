@@ -22,8 +22,8 @@ BAUD_RATE = 115200
 PREFIX = '/home/ccl/cellular_prediction/dataset/5g'
 
 CSV_HEADER = [
-    "timestamp", "network_mode", "state", "duplex_mode", 
-    "cell_id", "rsrp", "rsrq", "sinr", "tx_power", 
+    "timestamp", "network_mode", "operator", "state", "duplex_mode", 
+    "cell_id", "rsrp", "rsrq", "sinr", "tx_power", "srxlev", "channel_id",
     "max_neighbor_rsrp", "max_neighbor_rsrq", "max_neighbor_sinr", 
     "avg_neighbor_rsrp", "avg_neighbor_rsrq", "avg_neighbor_sinr", 
     "bandwidth", "cell_changed", "rssi", "band", "mcs", "ul_throughput"
@@ -49,6 +49,7 @@ def parse_servingcell(response):
             sinr = ''
             bandwidth = ''
             tx_power = ''
+            srxlev = ''
 
             if len(parts) == 2:
                 last_state = parts[1]
@@ -67,6 +68,7 @@ def parse_servingcell(response):
                 sinr = parts[14]
                 bandwidth = parts[11]
                 tx_power = parts[15]
+                srxlev = parts[16]
             elif parts[2] == '"LTE"':
                 net_mode = 'LTE'
                 state = parts[1]
@@ -77,6 +79,7 @@ def parse_servingcell(response):
                 sinr = parts[16]
                 bandwidth = parts[11]
                 tx_power = parts[18]
+                srxlev = parts[19]
             elif parts[0] == '"LTE"':
                 net_mode = 'EN-DC'
                 state = last_state
@@ -87,6 +90,7 @@ def parse_servingcell(response):
                 sinr = parts[14]
                 bandwidth = parts[9]
                 tx_power = parts[16]
+                srxlev = parts[17]
                 last_state = ''
                 
             return {
@@ -98,7 +102,8 @@ def parse_servingcell(response):
                 'rsrq': rsrq,
                 'sinr': sinr,
                 'bandwidth': bandwidth,
-                'tx_power': tx_power
+                'tx_power': tx_power,
+                'srxlev': srxlev,
             }
         
         return None
@@ -178,7 +183,9 @@ def parse_qnwinfo(response):
                 return None
             
             return {
+                'operator': parts[1],
                 'band': parts[2][1:-1],
+                'channel_id': parts[3],
             }
         return None
     except Exception as e:
@@ -267,6 +274,7 @@ def start_5g(lines, serial_port, ip):
             writer.writerow([
                 ts,
                 net_mode,
+                qnwinfo_data.get('operator', 'N/A') if qnwinfo_data else 'N/A',
                 serving_data.get('state', 'N/A') if serving_data else 'N/A',
                 serving_data.get('duplex_mode', 'N/A') if serving_data else 'N/A',
                 serving_data.get('cell_id', 'N/A') if serving_data else 'N/A',
@@ -274,6 +282,8 @@ def start_5g(lines, serial_port, ip):
                 serving_data.get('rsrq', 'N/A') if serving_data else 'N/A',
                 serving_data.get('sinr', 'N/A') if serving_data else 'N/A', 
                 serving_data.get('tx_power', 'N/A') if serving_data else 'N/A', 
+                serving_data.get('srxlev', 'N/A') if serving_data else 'N/A', 
+                qnwinfo_data.get('channel_id', 'N/A') if qnwinfo_data else 'N/A',
                 neighbor_data['max_rsrp'],
                 neighbor_data['max_rsrq'],
                 neighbor_data['max_sinr'],
