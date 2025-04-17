@@ -3,6 +3,7 @@ import json
 import time
 import threading
 import math
+import select
 
 from utils import *
 
@@ -42,60 +43,53 @@ class TransportCollector:
         
         while True:
             try:
-                line = process.stdout.readline()
-                if not line:
-                    break
+                rlist, _, _ = select.select([process.stdout], [], [], 3.0)
+                line = ''
+                if len(rlist) > 0:
+                    line = process.stdout.readline()
+                    if line.strip() == "":
+                        continue
+                    elif "Interim" not in line and "MIGRATED" not in line:
+                        self.ul_throughput= 0.0
+                        process = subprocess.Popen(
+                            cmd, 
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True,
+                        )
+                        continue
+                else:
+                    process = subprocess.Popen(
+                        cmd, 
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        text=True,
+                    )
+                    continue
 
                 if "Interim" in line and "sender" not in line:
+                    # print(line)
                     combine_data = line.split(' ')
                     combine_data = [x.strip() for x in combine_data if x != '']
                     self.ul_throughput= float(combine_data[2])
 
             except Exception as e:
                 log(LOG_PREFIX, f"run_iperf_test error: {str(e)}")
-    
-    def ping_monitor(self):
-        """Continuously run ping and update RTT."""
-        process = subprocess.Popen(
-            ["ping", self.server_ip],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        
-        while True:
-            try:
-                line = process.stdout.readline()
-                if not line:
-                    break
-                    
-                if "time=" in line:
-                    rtt = float(line.split("time=")[1].split(" ms")[0])
-                    self.rtt = rtt
-                elif "Request timeout" in line:
-                    self.rtt = math.nan
-                        
-            except Exception as e:
-                log(LOG_PREFIX, f"Ping monitor error: {str(e)}")
+                time.sleep(1)
 
     def start_services(self):
         """Start all background services."""
         threading.Thread(target=self.run_iperf_test).start()
-        # threading.Thread(target=self.ping_monitor).start()
 
 # def main():
 
-#     collector = TransportCollector()
+#     collector = TransportCollector('192.168.218.128')
 #     collector.start_services()
     
 #     while True:
 #         try:
-#             print(f"Uplink Bandwidth: {collector.ul_bandwidth:.2f} Kbits/sec")
-#             print(f"Throughput: {collector.ul_throughput:.2f} MBytes")
-#             print(f"RTT: {collector.rtt:.2f} ms")
-#             print(f"Retry: {collector.retry} times")
-#             print(f"CongestionWindow: {collector.cwnd} KBytes")
-#             print(f"----------------------------------------------")
+#             # print(f"Throughput: {collector.ul_throughput:.2f} Kbits/s")
+#             # print(f"----------------------------------------------")
             
 #             time.sleep(1)
             
